@@ -3,39 +3,38 @@ const Database = require('../db/database');
 const conexao = new Database();
 class ProdutoModel {
 
-    #produtoId;
-    #produtoCodigo;
-    #produtoNome;
-    #produtoQuantidade;
-    #categoriaId;
-    #categoriaNome;
-    #marcaId;
-    #marcaNome;
+    
+    #codigo_Produto;
+    #nome;
+    #descricao
+    #preco;
+    #receita_idReceita;
+    #Categoria_idCategoria;
+    
+    
 
-    get produtoId() { return this.#produtoId; } set produtoId(produtoId) {this.#produtoId = produtoId;}
-    get produtoCodigo() { return this.#produtoCodigo; } set produtoCodigo(produtoCodigo) {this.#produtoCodigo = produtoCodigo;}
-    get produtoNome() { return this.#produtoNome; } set produtoNome(produtoNome) {this.#produtoNome = produtoNome;}
-    get produtoQuantidade() { return this.#produtoQuantidade; } set produtoQuantidade(produtoQuantidade) {this.#produtoQuantidade = produtoQuantidade;}
-    get categoriaId() { return this.#categoriaId; } set categoriaId(categoriaId) {this.#categoriaId = categoriaId;}
-    get categoriaNome() { return this.#categoriaNome; } set categoriaNome(categoriaNome) {this.#categoriaNome = categoriaNome;}
-    get marcaId() { return this.#marcaId; } set marcaId(marcaId) {this.#marcaId = marcaId;}
-    get marcaNome() { return this.#marcaNome; } set marcaNome(marcaNome) {this.#marcaNome = marcaNome;}
+    get codigo_Produto() { return this.#codigo_Produto; } set codigo_Produto(codigo_Produto) {this.#codigo_Produto = codigo_Produto;}
+    get nome() { return this.#nome; } set nome(nome) {this.#nome = nome;}
+    get descricao() { return this.#descricao; } set descricao(descricao) {this.#descricao = descricao;}
+    get preco() { return this.#preco; } set preco(preco) {this.#preco = preco;}
+    get receita_idReceita() { return this.#receita_idReceita; } set receita_idReceita(receita_idReceita) {this.#receita_idReceita = receita_idReceita;}
+    get Categoria_idCategoria() { return this.#Categoria_idCategoria; } set Categoria_idCategoria(Categoria_idCategoria) {this.#Categoria_idCategoria = Categoria_idCategoria;}
+    
 
-    constructor(produtoId, produtoCodigo, produtoNome, produtoQuantidade, categoriaId, marcaId, categoriaNome, marcaNome) {
-        this.#produtoId = produtoId
-        this.#produtoCodigo = produtoCodigo
-        this.#produtoNome = produtoNome
-        this.#produtoQuantidade = produtoQuantidade
-        this.#categoriaId = categoriaId;
-        this.#categoriaNome = categoriaNome;
-        this.#marcaId = marcaId;
-        this.#marcaNome = marcaNome;
+    constructor(codigo_Produto, nome,descricao, preco, receita_idReceita, Categoria_idCategoria) {
+        this.#codigo_Produto = codigo_Produto
+        this.#nome = nome
+        this.#descricao = descricao
+        this.#preco = preco
+        this.#receita_idReceita = receita_idReceita
+        this.#Categoria_idCategoria = Categoria_idCategoria;
+       
     }
 
 
     async listarProdutos() {
 
-        let sql = 'select * from tb_produto p inner join tb_categoria c on p.cat_id = c.cat_id inner join tb_marca m on p.mar_id = m.mar_id';
+        let sql = 'SELECT * FROM `produto`';
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -44,11 +43,32 @@ class ProdutoModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new ProdutoModel(row['prd_id'], row['prd_cod'], row['prd_nome'], row['prd_quantidade'], row['cat_id'], row['mar_id'], row['cat_nome'], row['mar_nome']));
+                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'],row['receita_idReceita'],row['Categoria_idCategoria']));
             }
         }
 
         return listaRetorno;
+    }
+
+
+
+    async cadastrarProdutos() {
+
+        let sql = "INSERT INTO `produto`(`codigo_Produto`, `nome`, `descricao`, `preco`, `receita_idReceita`, `Categoria_idCategoria`) VALUES ('6','feijao','ingrediente receita','10','6','6')";
+        
+        var rows = await conexao.ExecutaComando(sql);
+
+        return true;
+    }
+
+
+    async deletarProduto() {
+
+        let sql = "DELETE FROM `produto` WHERE `produto`.`codigo_Produto` = 6 AND `produto`.`receita_idReceita` = 6 AND `produto`.`Categoria_idCategoria` = 6";
+        
+        var rows = await conexao.ExecutaComando(sql);
+
+        return true;
     }
 
 }

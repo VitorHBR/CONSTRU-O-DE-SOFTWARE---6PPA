@@ -16,7 +16,16 @@ class ProdutoRoute {
 
         let ctrl = new ProdutoController
         this.#router.get('/', ctrl.listarView);
+        this.#router.get('/cadastrarproduto', ctrl.cadastrarProduto);
+        this.#router.get('/deletarproduto', ctrl.deletarProduto);
     }
 }
+
+
+
+
+
+
+
 
 module.exports = ProdutoRoute;

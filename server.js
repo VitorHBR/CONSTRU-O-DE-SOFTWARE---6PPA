@@ -27,6 +27,7 @@ let produtoRota = new ProdutoRoute();
 app.use('/produto', produtoRota.router);
 
 
+
 //ponto de inicio do nosso servidor web
 const server = app.listen('5000', function() {
     console.log('Servidor web iniciado');
