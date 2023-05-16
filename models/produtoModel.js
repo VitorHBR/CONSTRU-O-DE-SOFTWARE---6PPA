@@ -2,7 +2,7 @@ const Database = require('../db/database');
 
 const conexao = new Database();
 class ProdutoModel {
-
+   
     
     #codigo_Produto;
     #nome;
@@ -10,7 +10,7 @@ class ProdutoModel {
     #preco;
     #receita_idReceita;
     #Categoria_idCategoria;
-    
+   
     
 
     get codigo_Produto() { return this.#codigo_Produto; } set codigo_Produto(codigo_Produto) {this.#codigo_Produto = codigo_Produto;}
@@ -20,6 +20,7 @@ class ProdutoModel {
     get receita_idReceita() { return this.#receita_idReceita; } set receita_idReceita(receita_idReceita) {this.#receita_idReceita = receita_idReceita;}
     get Categoria_idCategoria() { return this.#Categoria_idCategoria; } set Categoria_idCategoria(Categoria_idCategoria) {this.#Categoria_idCategoria = Categoria_idCategoria;}
     
+   
 
     constructor(codigo_Produto, nome,descricao, preco, receita_idReceita, Categoria_idCategoria) {
         this.#codigo_Produto = codigo_Produto
@@ -28,9 +29,10 @@ class ProdutoModel {
         this.#preco = preco
         this.#receita_idReceita = receita_idReceita
         this.#Categoria_idCategoria = Categoria_idCategoria;
+        
        
     }
-
+        
 
     async listarProdutos() {
 
@@ -44,6 +46,8 @@ class ProdutoModel {
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
                 listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'],row['receita_idReceita'],row['Categoria_idCategoria']));
+                
+                
             }
         }
 
@@ -54,7 +58,7 @@ class ProdutoModel {
 
     async cadastrarProdutos() {
 
-        let sql = "INSERT INTO `produto`(`codigo_Produto`, `nome`, `descricao`, `preco`, `receita_idReceita`, `Categoria_idCategoria`) VALUES ('6','feijao','ingrediente receita','10','6','6')";
+        let sql = "INSERT INTO `produto`(`nome`, `descricao`, `preco`, `receita_idReceita`, `Categoria_idCategoria`) VALUES ('"+this.#nome+"','"+this.#descricao+"','"+this.#preco+"','"+this.receita_idReceita+"','"+this.#Categoria_idCategoria+"')";
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -62,9 +66,9 @@ class ProdutoModel {
     }
 
 
-    async deletarProduto() {
+    async deletarProduto(codigo) {
 
-        let sql = "DELETE FROM `produto` WHERE `produto`.`codigo_Produto` = 6 AND `produto`.`receita_idReceita` = 6 AND `produto`.`Categoria_idCategoria` = 6";
+        let sql = "DELETE FROM `produto` WHERE `produto`.`codigo_Produto` = "+codigo;
         
         var rows = await conexao.ExecutaComando(sql);
 

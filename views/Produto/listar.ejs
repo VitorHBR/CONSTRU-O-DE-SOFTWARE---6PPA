@@ -16,32 +16,33 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form>
+        <form method="post" action="/produto/cadastrarproduto">
           <div class="mb-3">
             <label for="recipient-name" class="col-form-label">Nome:</label>
-            <input type="text" class="form-control" id="nome">
+            <input name="nome" type="text" class="form-control" id="nome">
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Descrição:</label>
-            <textarea class="form-control" id="descricao"></textarea>
+            <textarea name="descricao" class="form-control" id="descricao"></textarea>
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Valor:</label>
-            <input type="number"  class="form-control" id="preco">           
+            <input name="preco" type="number"  class="form-control" id="preco">           
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Receita:</label>
-            <textarea class="form-control" id="receita"></textarea>
+            <textarea name="receita" class="form-control" id="receita"></textarea>
           </div>
           <div class="mb-3">
             <label for="message-text" class="col-form-label">Categoria:</label>
-            <textarea class="form-control" id="categoria"></textarea>
+            <textarea name="categoria" class="form-control" id="categoria"></textarea>
           </div>
+          <button class="btn btn-primary" type="submit">Enviar</button>
         </form>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
-        <a class="btn btn-primary" href="/produto/cadastrarproduto" role="button">Cadastrar</a>
+       
       </div>
     </div>
   </div>
@@ -71,8 +72,8 @@
                         <td id="categoria"><%= value.Categoria_idCategoria %></td>                   
                         <td>
                             <div>
-                                <button class="btn btn-primary"> <i class="fas fa-pen"></i></button>
-                                <a class="btn btn-danger" href="/produto/deletarproduto?cod=<%= value.codigo_Produto %>" role="button"><i class="fas fa-trash"></i></a>
+                                <button onclick="alterar('<%= value.codigo_Produto %>','<%= value.nome %>,<%= value.descricao %>','<%= value.preco %>','<%= value.receita_idReceita %>','<%= value.Categoria_idCategoria %>')" class="btn btn-primary"> <i class="fas fa-pen"></i></button>
+                                <a class="btn btn-danger" href="/produto/deletarproduto/<%= value.codigo_Produto %>" role="button"><i class="fas fa-trash"></i></a>
                             </div>
                         </td>
                     </tr>
