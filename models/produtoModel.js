@@ -55,6 +55,27 @@ class ProdutoModel {
     }
 
 
+    async buscarProdutos() {
+
+        let sql = "SELECT * FROM `produto` WHERE `nome` LIKE '%"+this.#nome+"%'";
+        
+        var rows = await conexao.ExecutaComando(sql);
+
+        let listaRetorno = [];
+
+        if(rows.length > 0){
+            for(let i=0; i<rows.length; i++){
+                var row = rows[i];
+                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'],row['receita_idReceita'],row['Categoria_idCategoria']));
+                
+                
+            }
+        }
+
+        return listaRetorno;
+    }
+
+
 
     async cadastrarProdutos() {
 
@@ -69,6 +90,16 @@ class ProdutoModel {
     async deletarProduto(codigo) {
 
         let sql = "DELETE FROM `produto` WHERE `produto`.`codigo_Produto` = "+codigo;
+        
+        var rows = await conexao.ExecutaComando(sql);
+
+        return true;
+    }
+
+    
+    async alterarProdutos() {
+
+        let sql = "UPDATE `produto` SET `nome` = '"+this.#nome+"', `descricao` = '"+this.#descricao+"', `preco` = '"+this.#preco+"', `receita_idReceita` = '"+this.receita_idReceita+"', `Categoria_idCategoria` = '"+this.#Categoria_idCategoria+"' WHERE `produto`.`codigo_Produto` = "+this.#codigo_Produto+"";
         
         var rows = await conexao.ExecutaComando(sql);
 

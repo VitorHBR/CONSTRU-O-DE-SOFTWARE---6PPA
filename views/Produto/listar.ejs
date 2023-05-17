@@ -2,10 +2,20 @@
 <script src="/js/Produto/listar.js"></script>
 
 <div>
-    <h1>Produtos</h1>
+  <h1>Produtos</h1>
+ 
     <div>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <form class="d-flex" role="search" method="post" action="/produto/buscarproduto">
+            <input class="form-control me-2" type="search" placeholder="Procurar" aria-label="Search" name="busca">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="fas fa-plus"></i> Cadastrar</button>
+        </div>
+      </nav>
+
         
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="fas fa-plus"></i> Cadastrar</button>
 
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -37,7 +47,7 @@
             <label for="message-text" class="col-form-label">Categoria:</label>
             <textarea name="categoria" class="form-control" id="categoria"></textarea>
           </div>
-          <button class="btn btn-primary" type="submit">Enviar</button>
+          <button class="btn btn-primary" type="submit">Cadastrar</button>
         </form>
       </div>
       <div class="modal-footer">
@@ -72,7 +82,54 @@
                         <td id="categoria"><%= value.Categoria_idCategoria %></td>                   
                         <td>
                             <div>
-                                <button onclick="alterar('<%= value.codigo_Produto %>','<%= value.nome %>,<%= value.descricao %>','<%= value.preco %>','<%= value.receita_idReceita %>','<%= value.Categoria_idCategoria %>')" class="btn btn-primary"> <i class="fas fa-pen"></i></button>
+                              <div>
+        
+                                <button onclick="alterar('<%= value.nome %>')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleAlterar<%= value.codigo_Produto %>" data-bs-whatever="@alterar"><i class="fas fa-pen"></i></button>
+                        
+                        
+                        <div class="modal fade" id="exampleAlterar<%= value.codigo_Produto %>" tabindex="-1" aria-labelledby="exampleAltear<%= value.codigo_Produto %>Label" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleAltear<%= value.codigo_Produto %>Label">Alterar Produto</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <form method="post" action="/produto/alterarproduto">
+                                  <div class="mb-3">
+                                    <input type="text" hidden="true" name="codigo" value="<%= value.codigo_Produto %>">
+
+                                    <label for="recipient-name" class="col-form-label">Nome:</label>
+                                    <input name="nome" type="text" class="form-control" id="alterarnome" value="<%= value.nome %>">
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Descrição:</label>
+                                    <textarea name="descricao" class="form-control" id="alterarescricao"><%= value.descricao %></textarea>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Valor:</label>
+                                    <input name="preco" type="number"  class="form-control" id="alterarpreco" value="<%= value.preco %>">           
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Receita:</label>
+                                    <textarea name="receita" class="form-control" id="alterarreceita"><%= value.receita_idReceita %></textarea>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Categoria:</label>
+                                    <textarea name="categoria" class="form-control" id="alterarcategoria"><%= value.Categoria_idCategoria %></textarea>
+                                  </div>
+                                  <button class="btn btn-primary" type="submit">Alterar</button>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
+                               
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                            </div>
+                                
                                 <a class="btn btn-danger" href="/produto/deletarproduto/<%= value.codigo_Produto %>" role="button"><i class="fas fa-trash"></i></a>
                             </div>
                         </td>

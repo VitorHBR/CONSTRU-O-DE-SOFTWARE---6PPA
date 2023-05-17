@@ -8,6 +8,14 @@ class ProdutoController {
         res.render('produto/listar', {lista: lista});
     }
 
+
+    async buscarProduto(req, res) {
+        let prod = new ProdutoModel();
+        prod.nome= req.body.busca;
+        let lista = await prod.buscarProdutos();
+        res.render('produto/listar', {lista: lista});
+    }
+
     async listarJson(req, res) {
         let prod = new ProdutoModel();
         let lista = await prod.listarProdutos();
@@ -38,6 +46,24 @@ class ProdutoController {
         let lista = await prod.listarProdutos();
         res.render('produto/listar', {lista: lista});
         
+    }
+
+
+    async alterarProduto(req, res) {
+        
+        console.log(req.body);
+        let prod = new ProdutoModel();
+
+        prod.codigo_Produto= req.body.codigo
+        prod.nome= req.body.nome;
+        prod.descricao=req.body.descricao;
+        prod.preco=req.body.preco;
+        prod.receita_idReceita=req.body.receita;
+        prod.Categoria_idCategoria=req.body.categoria;
+
+        let retorno = await prod.alterarProdutos();
+        let lista = await prod.listarProdutos();
+        res.render('produto/listar', {lista: lista});
     }
 }
 

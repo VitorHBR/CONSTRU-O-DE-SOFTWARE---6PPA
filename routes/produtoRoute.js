@@ -17,6 +17,8 @@ class ProdutoRoute {
         let ctrl = new ProdutoController
         this.#router.get('/', ctrl.listarView);
         this.#router.post('/cadastrarproduto', ctrl.cadastrarProduto);
+        this.#router.post('/alterarproduto', ctrl.alterarProduto);
+        this.#router.post('/buscarproduto', ctrl.buscarProduto);
         this.#router.get('/deletarproduto/:codigo', ctrl.deletarProduto);
     }
 }
