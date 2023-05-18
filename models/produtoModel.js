@@ -36,7 +36,7 @@ class ProdutoModel {
 
     async listarProdutos() {
 
-        let sql = 'SELECT * FROM `produto`';
+        let sql = 'SELECT * FROM produto LEFT JOIN categoria ON produto.Categoria_idCategoria = categoria.idCategoria';
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -45,7 +45,7 @@ class ProdutoModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'],row['receita_idReceita'],row['Categoria_idCategoria']));
+                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'],row['receita_idReceita'],row['descricao']));
                 
                 
             }
