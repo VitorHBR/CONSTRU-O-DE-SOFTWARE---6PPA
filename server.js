@@ -4,14 +4,9 @@ const expressLayouts = require('express-ejs-layouts');
 const HomeRoute = require('./routes/homeRoute');
 const ProdutoRoute = require('./routes/produtoRoute');
 const CategoriaRoute = require('./routes/categoriaRoute');
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 const ReceitaRoute = require('./routes/receitaRoute');
->>>>>>> parent of 7e2c15a (Revert "Merge branch 'main' of https://github.com/VitorHBR/CONSTRU-O-DE-SOFTWARE---6PPA")
-=======
 const ClienteRoute = require ('./routes/clienteRoute');
->>>>>>> parent of 809bb0f (Revert "Função Cliente")
+
 
 const app = express();
 
@@ -36,16 +31,10 @@ let produtoRota = new ProdutoRoute();
 app.use('/produto', produtoRota.router);
 let categoriaRota = new CategoriaRoute();
 app.use('/categoria', categoriaRota.router);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 let receitaRota = new ReceitaRoute();
 app.use('/receita', receitaRota.router);
->>>>>>> parent of 7e2c15a (Revert "Merge branch 'main' of https://github.com/VitorHBR/CONSTRU-O-DE-SOFTWARE---6PPA")
-=======
 let clienteRota = new ClienteRoute();
 app.use('/cliente', clienteRota.router);
->>>>>>> parent of 809bb0f (Revert "Função Cliente")
 
 
 //ponto de inicio do nosso servidor web

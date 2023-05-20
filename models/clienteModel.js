@@ -74,7 +74,7 @@ class ClienteModel {
 
     async cadastrarClientes() {
 
-        let sql = "INSERT INTO `cliente`(`cpf_Cliente`, `nome`, `telefone`, `email`, `endereco`) VALUES ('"+this.#cpf_Cliente+"', '"+this.#nome+"','"+this.#telefone+"','"+this.#email+"','"+this.endereco+"',')";
+        let sql = "INSERT INTO `cliente`(`cpf_Cliente`, `nome`, `telefone`, `email`, `endereco`) VALUES ('"+this.#cpf_Cliente+"', '"+this.#nome+"','"+this.#telefone+"','"+this.#email+"','"+this.endereco+"')";
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -93,13 +93,14 @@ class ClienteModel {
 
     
     async alterarClientes() {
-
-        let sql = "UPDATE `cliente` SET `nome` = '"+this.#nome+"', `telefone` = '"+this.#telefone+"', `email` = '"+this.#email+"', `endereco` = '"+this.endereco+"' WHERE `cliente`.`cpf_Cliente` = "+this.#cpf_Cliente+"";
-        
-        var rows = await conexao.ExecutaComando(sql);
-
+        let sql = "UPDATE `cliente` SET `nome` = ?, `telefone` = ?, `email` = ?, `endereco` = ? WHERE `cliente`.`cpf_Cliente` = ?";
+      
+        var values = [this.#nome, this.#telefone, this.#email, this.endereco, this.#cpf_Cliente];
+      
+        var rows = await conexao.ExecutaComando(sql, values);
+      
         return true;
-    }
+      }
 
 }
 
