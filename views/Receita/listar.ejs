@@ -1,0 +1,119 @@
+<!--Para fazer com fetch
+<script src="/js/Produto/listar.js"></script>-->
+
+<div>
+  <h1>Receita</h1>
+ 
+    <div>
+      <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid">
+          <form class="d-flex" role="search" method="post" action="/receita/buscarreceita">
+            <input class="form-control me-2" type="search" placeholder="Procurar" aria-label="Search" name="busca">
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"><i class="fas fa-plus"></i> Cadastrar</button>
+        </div>
+      </nav>
+
+        
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Nova Receita</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/receita/cadastrarreceita">
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Nome:</label>
+            <textarea name="nome" class="form-control" id="nome"></textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Descrição:</label>
+            <textarea name="descricao" class="form-control" id="descricao"></textarea>
+          </div>
+           
+          <button class="btn btn-primary" type="submit">Cadastrar</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
+       
+      </div>
+    </div>
+  </div>
+</div>
+    </div>
+    <div class="table-responsive" style="margin-top: 15px;">
+        <table class="table table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Código</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                <% lista.map(function(value, index) { %>
+                    <tr>
+                        <td id="cod"><%= value.idReceita %></td>
+                        <td id="nome"><%= value.nome %></td>                          
+                        <td id="descricao"><%= value.descricao %></td>
+                                           
+                        <td>
+                            <div>
+                              <div>
+        
+                                <button onclick="alterar('<%= value.nome %>')" type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleAlterar<%= value.idReceita %>" data-bs-whatever="@alterar"><i class="fas fa-pen"></i></button>
+                        
+                        
+                        <div class="modal fade" id="exampleAlterar<%= value.idReceita %>" tabindex="-1" aria-labelledby="exampleAltear<%= value.idReceita%>Label" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleAltear<%= value.idReceita %>Label">Alterar Receita</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+                                <form method="post" action="/receita/alterarreceita">
+                                  <div class="mb-3">
+                                    <input type="text" hidden="true" name="codigo" value="<%= value.idReceita %>">
+
+                                
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Nome:</label>
+                                    <textarea name="nome" class="form-control" id="nome"><%= value.nome %></textarea>
+                                  </div>
+                                  <div class="mb-3">
+                                    <label for="message-text" class="col-form-label">Descrição:</label>
+                                    <textarea name="descricao" class="form-control" id="alterarescricao"><%= value.descricao %></textarea>
+                                  </div>
+                   
+                                  <button class="btn btn-primary" type="submit">Alterar</button>
+                                </form>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
+                               
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                            </div>
+                                
+                                <a class="btn btn-danger" href="/receita/deletarreceita/<%= value.idReceita %>" role="button"><i class="fas fa-trash"></i></a>
+                            </div>
+                        </td>
+                    </tr>
+                <% }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
