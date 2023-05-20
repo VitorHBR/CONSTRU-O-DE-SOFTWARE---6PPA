@@ -4,7 +4,7 @@ const expressLayouts = require('express-ejs-layouts');
 const HomeRoute = require('./routes/homeRoute');
 const ProdutoRoute = require('./routes/produtoRoute');
 const CategoriaRoute = require('./routes/categoriaRoute');
-const ClienteRoute = require ('./routes/clienteRoute');
+const ReceitaRoute = require('./routes/receitaRoute');
 
 const app = express();
 
@@ -29,8 +29,8 @@ let produtoRota = new ProdutoRoute();
 app.use('/produto', produtoRota.router);
 let categoriaRota = new CategoriaRoute();
 app.use('/categoria', categoriaRota.router);
-let clienteRota = new ClienteRoute();
-app.use('/cliente', clienteRota.router);
+let receitaRota = new ReceitaRoute();
+app.use('/receita', receitaRota.router);
 
 
 //ponto de inicio do nosso servidor web

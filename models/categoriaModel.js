@@ -32,7 +32,7 @@ class CategoriaModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new CategoriaModel(row['idCategoria'], row['descricao']));
+                listaRetorno.push(new CategoriaModel(row['idCategoria'], row['categoriadescricao']));
                 
                 
             }
@@ -44,7 +44,7 @@ class CategoriaModel {
 
     async buscarCategorias() {
 
-        let sql = "SELECT * FROM `categoria` WHERE `descricao` LIKE '%"+this.descricao+"%'";
+        let sql = "SELECT * FROM `categoria` WHERE `categoriadescricao` LIKE '%"+this.descricao+"%'";
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -53,7 +53,7 @@ class CategoriaModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new CategoriaModel(row['idCategoria'], row['descricao']));
+                listaRetorno.push(new CategoriaModel(row['idCategoria'], row['categoriadescricao']));
                 
                 
             }
@@ -67,7 +67,7 @@ class CategoriaModel {
 
     async cadastrarCategorias() {
 
-        let sql = "INSERT INTO `categoria` (`idCategoria`, `descricao`) VALUES (NULL, '"+this.#descricao+"')";
+        let sql = "INSERT INTO `categoria` (`idCategoria`, `categoriadescricao`) VALUES (NULL, '"+this.#descricao+"')";
         
         var rows = await conexao.ExecutaComando(sql);
         
