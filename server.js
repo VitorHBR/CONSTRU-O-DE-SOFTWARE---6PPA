@@ -6,6 +6,7 @@ const ProdutoRoute = require('./routes/produtoRoute');
 const CategoriaRoute = require('./routes/categoriaRoute');
 const ReceitaRoute = require('./routes/receitaRoute');
 const ClienteRoute = require ('./routes/clienteRoute');
+const FuncionarioRoute = require ('./routes/funcionarioRoute');
 
 
 const app = express();
@@ -35,6 +36,8 @@ let receitaRota = new ReceitaRoute();
 app.use('/receita', receitaRota.router);
 let clienteRota = new ClienteRoute();
 app.use('/cliente', clienteRota.router);
+let funcionarioRota = new FuncionarioRoute();
+app.use('/funcionario', funcionarioRota.router);
 
 
 //ponto de inicio do nosso servidor web
