@@ -49,7 +49,7 @@ class FuncionarioModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new FuncionarioModel(row['idfuncionario'], row['nome'], row['telefone'], row['email'],row['endereco'],row['departamento'],row['cargo']));
+                listaRetorno.push(new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'], row['email'],row['endereco'],row['departamento'],row['cargo']));
                 
             }
         }
@@ -69,7 +69,7 @@ class FuncionarioModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new FuncionarioModel(row['idfuncionario'], row['nome'], row['telefone'], row['email'],row['endereco'],row['departamento'],row['cargo']));
+                listaRetorno.push(new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'], row['email'],row['endereco'],row['departamento'],row['cargo']));
                 
                 
             }
@@ -82,7 +82,7 @@ class FuncionarioModel {
 
     async cadastrarFuncionarios() {
 
-        let sql = "INSERT INTO `funcionario`(`idfuncionario`, `nome`, `telefone`, `email`, `endereco`, `departamento`, `cargo`) VALUES ('"+this.#idfuncionario+"', '"+this.#nome+"','"+this.#telefone+"','"+this.#email+"','"+this.endereco+"','"+this.departamento+"','"+this.cargo+"')";
+        let sql = "INSERT INTO `funcionario`(`idFuncionario`, `nome`, `telefone`, `email`, `endereco`, `departamento`, `cargo`) VALUES ('"+this.#idfuncionario+"', '"+this.#nome+"','"+this.#telefone+"','"+this.#email+"','"+this.endereco+"','"+this.departamento+"','"+this.cargo+"')";
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -92,7 +92,7 @@ class FuncionarioModel {
 
     async deletarFuncionario(idfuncionario) {
 
-        let sql = "DELETE FROM `funcionario` WHERE `funcionario`.`idfuncionario` = "+idfuncionario;
+        let sql = "DELETE FROM `funcionario` WHERE `funcionario`.`idFuncionario` = "+idfuncionario;
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -101,7 +101,7 @@ class FuncionarioModel {
 
     
     async alterarFuncionarios() {
-        let sql = "UPDATE `funcionario` SET `nome` = ?, `telefone` = ?, `email` = ?, `endereco` = ?, `departamento` = ?,  `cargo` = ? WHERE `funcionario`.`idfuncionario` = ?";
+        let sql = "UPDATE `funcionario` SET `nome` = ?, `telefone` = ?, `email` = ?, `endereco` = ?, `departamento` = ?,  `cargo` = ? WHERE `funcionario`.`idFuncionario` = ?";
       
         var values = [this.#nome, this.#telefone, this.#email, this.endereco, this.departamento, this.cargo, this.#idfuncionario];
       
