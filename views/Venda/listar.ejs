@@ -1,34 +1,35 @@
 <div class="container">
-    <h1 class="mt-4">Controle de Vendas</h1>
+  <h1 class="mt-4">Controle de Vendas</h1>
 
-    <div class="mt-4">
-      <form>
-        <div class="row">
-          <div class="col-md-6">
-            <div class="form-group">
-              <label for="produto">Produto:</label>
-              <input type="text" class="form-control" id="produto">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="quantidade">Quantidade:</label>
-              <input type="number" class="form-control" id="quantidade">
-            </div>
-          </div>
-          <div class="col-md-3">
-            <div class="form-group">
-              <label for="valor">Valor:</label>
-              <input type="text" class="form-control" id="valor" readonly>
-            </div>
+  <div class="mt-4">
+    <form>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form-group">
+            <label for="produto">Produto:</label>
+            <input type="text" class="form-control" id="produto">
           </div>
         </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="quantidade">Quantidade:</label>
+            <input type="number" class="form-control" id="quantidade">
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="form-group">
+            <label for="valor">Valor:</label>
+            <input type="text" class="form-control" id="valor" readonly>
+          </div>
+        </div>
+      </div>
 
-        <button type="button" class="btn btn-primary mt-3" id="adicionar">Adicionar</button>
-
-        <table class="table mt-4">
+      <button type="button" class="btn btn-primary mt-3" id="adicionar">Adicionar</button>
+      <div class="table-responsive" style="margin-top: 15px;">
+        <table class="table table-striped table-hover">
           <thead>
             <tr>
+              <th>Código</th>
               <th>Produto</th>
               <th>Quantidade</th>
               <th>Valor</th>
@@ -36,49 +37,60 @@
             </tr>
           </thead>
           <tbody id="lista-produtos">
-            <!-- Os produtos adicionados serão exibidos aqui -->
+            <tr>
+              <td>teste</td>
+              <td>teste</td>
+              <td>teste</td>
+              <td>teste</td>
+              <td>
+                <div>
+                  <a class="btn btn-danger" role="button"><i class="fas fa-trash"></i></a>
+                </div>
+              </td>
+            </tr>
           </tbody>
         </table>
-
-        <button type="button" class="btn btn-primary mt-3" id="selecionar-cliente" data-bs-toggle="modal" data-bs-target="#modal-cliente">Selecionar Cliente</button>
-
-        <div class="text-end">
-          <h4>Total: <span id="total">0.00</span></h4>
-        </div>
-
-        <button type="submit" class="btn btn-success mt-3">Finalizar Venda</button>
-      </form>
-    </div>
-  </div>
-
-  <!-- Modal para selecionar o cliente -->
-  <div class="modal fade" id="modal-cliente" tabindex="-1" aria-labelledby="modal-cliente-label" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="modal-cliente-label">Selecionar Cliente</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          <!-- Formulário para selecionar o cliente -->
-          <form>
-            <div class="form-group">
-              <label for="cliente">Cliente:</label>
-              <select class="form-select" id="cliente">
-                <option value="">Selecione um cliente</option>
-                <option value="cliente1">Cliente 1</option>
-                <option value="cliente2">Cliente 2</option>
-                <!-- mais opções de cliente conforme necessário -->
-              </select>
-            </div>
-            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Confirmar</button>
-          </form>
-        </div>
       </div>
-    </div>
+        <div class="row">
+          <div class="col">
+            <!-- Formulário para selecionar o pagamento -->
+            <form>
+              <div class="form-group">
+                <label for="pagamento">Pagamento:</label>
+                <select class="form-select" id="pagamento">
+                  <option value="">Selecione o meio de pagamento</option>
+                  <option value="pagamento1">Dinheiro</option>
+                  <option value="pagamento2">PIX</option>
+                  <option value="pagamento1">Cartão de Crédito</option>
+                  <option value="pagamento2">Cartão de Débito</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="col">
+            <!-- Formulário para selecionar o cliente -->
+            <form>
+              <div class="form-group">
+                <label for="cliente">Cliente:</label>
+                <select class="form-select" id="cliente">
+                  <option value="">Selecione um cliente</option>
+                  <option value="cliente1">Cliente 1</option>
+                  <option value="cliente2">Cliente 2</option>
+                </select>
+              </div>
+            </form>
+          </div>
+        </div>
+      <div class="text-end">
+        <h4>Total: <span id="total">0.00</span></h4>
+      </div>
+
+      <button type="submit" class="btn btn-success mt-3">Finalizar Venda</button>
+    </form>
   </div>
+</div>
 
-  <script>
+
+<script>
     //código JavaScript para manipular os eventos e cálculos da tela pode ser adicionado aqui
-  </script>
-
+</script>
