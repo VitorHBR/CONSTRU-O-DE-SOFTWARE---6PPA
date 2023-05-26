@@ -1,5 +1,6 @@
 const express = require('express');
 const FuncionarioController = require('../controllers/funcionarioController');
+const Autenticacao = require('../middleware/autenticacao');
 
 class FuncionarioRoute {
 
@@ -13,13 +14,13 @@ class FuncionarioRoute {
 
     constructor() {
         this.#router = express.Router();
-
+        let auth = new Autenticacao();
         let ctrl = new FuncionarioController
-        this.#router.get('/', ctrl.listarView);
-        this.#router.post('/cadastrarfuncionario', ctrl.cadastrarFuncionario);
-        this.#router.post('/alterarfuncionario', ctrl.alterarFuncionario);
-        this.#router.post('/buscarfuncionario', ctrl.buscarFuncionario);
-        this.#router.get('/deletarfuncionario/:idfuncionario', ctrl.deletarFuncionario);
+        this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
+        this.#router.post('/cadastrarfuncionario',auth.usuarioEstaLogado, ctrl.cadastrarFuncionario);
+        this.#router.post('/alterarfuncionario',auth.usuarioEstaLogado, ctrl.alterarFuncionario);
+        this.#router.post('/buscarfuncionario',auth.usuarioEstaLogado, ctrl.buscarFuncionario);
+        this.#router.get('/deletarfuncionario/:idfuncionario',auth.usuarioEstaLogado, ctrl.deletarFuncionario);
     }
 }
 

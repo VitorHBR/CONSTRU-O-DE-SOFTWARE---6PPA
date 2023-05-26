@@ -1,5 +1,6 @@
 const express = require('express');
 const HomeController = require('../controllers/homeController');
+const Autenticacao = require('../middleware/autenticacao');
 
 class HomeRoute {
 
@@ -15,7 +16,8 @@ class HomeRoute {
         this.#router = express.Router();
 
         let ctrl = new HomeController();
-        this.#router.get('/', ctrl.homeView);
+        let auth = new Autenticacao();
+        this.#router.get('/',auth.usuarioEstaLogado, ctrl.homeView);
         
     }
 }

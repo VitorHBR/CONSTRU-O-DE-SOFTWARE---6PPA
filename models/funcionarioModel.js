@@ -110,6 +110,18 @@ class FuncionarioModel {
         return true;
       }
 
+
+      async autenticarFuncionario (usuario, senha) {
+        const sql = "SELECT * FROM `funcionario` WHERE `email` LIKE '"+usuario+"' AND `senha` LIKE '"+senha+"'";
+       
+        var row = await conexao.ExecutaComando(sql);
+
+        if(row.length > 0)
+            return new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'], row['email'],row['endereco'],row['departamento'],row['cargo'])
+        else 
+            return null;
+    } 
+
 }
 
 module.exports = FuncionarioModel;

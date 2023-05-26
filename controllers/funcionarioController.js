@@ -70,6 +70,8 @@ class FuncionarioController {
         let lista = await cli.listarFuncionarios();
         res.render('funcionario/listar', {lista: lista});
     }
+
+    
 }
 
 module.exports = FuncionarioController;

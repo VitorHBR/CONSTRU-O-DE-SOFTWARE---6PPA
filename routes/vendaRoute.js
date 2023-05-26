@@ -1,5 +1,6 @@
 const express = require('express');
 const VendaController = require('../controllers/vendaController');
+const Autenticacao = require('../middleware/autenticacao');
 
 class VendaRoute {
 
@@ -13,9 +14,9 @@ class VendaRoute {
 
     constructor() {
         this.#router = express.Router();
-
+        let auth = new Autenticacao();
         let ctrl = new VendaController
-        this.#router.get('/', ctrl.listarView);
+        this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
        
     }
 }

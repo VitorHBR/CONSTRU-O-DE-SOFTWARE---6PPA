@@ -1,5 +1,6 @@
 const express = require('express');
 const ReceitaController = require('../controllers/receitaController');
+const Autenticacao = require('../middleware/autenticacao');
 
 class ReceitaRoute {
 
@@ -13,13 +14,13 @@ class ReceitaRoute {
 
     constructor() {
         this.#router = express.Router();
-
+        let auth = new Autenticacao();
         let ctrl = new ReceitaController
-        this.#router.get('/', ctrl.listarView);
-        this.#router.post('/cadastrarreceita', ctrl.cadastrarReceita);
-        this.#router.post('/alterarreceita', ctrl.alterarReceita);
-        this.#router.post('/buscarreceita', ctrl.buscarReceita);
-        this.#router.get('/deletarreceita/:codigo', ctrl.deletarReceita);
+        this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
+        this.#router.post('/cadastrarreceita',auth.usuarioEstaLogado, ctrl.cadastrarReceita);
+        this.#router.post('/alterarreceita',auth.usuarioEstaLogado, ctrl.alterarReceita);
+        this.#router.post('/buscarreceita',auth.usuarioEstaLogado, ctrl.buscarReceita);
+        this.#router.get('/deletarreceita/:codigo',auth.usuarioEstaLogado, ctrl.deletarReceita);
     }
 }
 

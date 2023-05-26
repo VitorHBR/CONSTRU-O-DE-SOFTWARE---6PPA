@@ -1,5 +1,6 @@
 const express = require('express');
 const CategoriaController = require('../controllers/categoriaController');
+const Autenticacao = require('../middleware/autenticacao');
 
 class CategoriaRoute {
 
@@ -15,11 +16,12 @@ class CategoriaRoute {
         this.#router = express.Router();
 
         let ctrl = new CategoriaController
-        this.#router.get('/', ctrl.listarView);
-        this.#router.post('/cadastrarcategoria', ctrl.cadastrarCategoria);
-        this.#router.post('/alterarcategoria', ctrl.alterarCategoria);
-        this.#router.post('/buscarcategoria', ctrl.buscarCategoria);
-        this.#router.get('/deletarcategoria/:codigo', ctrl.deletarCategoria);
+        let auth = new Autenticacao();
+        this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
+        this.#router.post('/cadastrarcategoria',auth.usuarioEstaLogado, ctrl.cadastrarCategoria);
+        this.#router.post('/alterarcategoria',auth.usuarioEstaLogado, ctrl.alterarCategoria);
+        this.#router.post('/buscarcategoria',auth.usuarioEstaLogado, ctrl.buscarCategoria);
+        this.#router.get('/deletarcategoria/:codigo',auth.usuarioEstaLogado, ctrl.deletarCategoria);
     }
 }
 

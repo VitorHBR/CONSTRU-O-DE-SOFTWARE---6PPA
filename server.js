@@ -8,6 +8,7 @@ const ReceitaRoute = require('./routes/receitaRoute');
 const ClienteRoute = require ('./routes/clienteRoute');
 const FuncionarioRoute = require ('./routes/funcionarioRoute');
 const VendaRoute = require ('./routes/vendaRoute');
+const LoginRoute = require('./routes/loginRoute');
 
 
 const app = express();
@@ -41,6 +42,9 @@ let funcionarioRota = new FuncionarioRoute();
 app.use('/funcionario', funcionarioRota.router);
 let vendaRota = new VendaRoute();
 app.use('/venda', vendaRota.router);
+
+let loginRota = new LoginRoute();
+app.use('/login', loginRota.router);
 
 
 //ponto de inicio do nosso servidor web
