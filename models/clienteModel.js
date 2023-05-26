@@ -84,7 +84,7 @@ class ClienteModel {
 
     async deletarCliente(cpf) {
 
-        let sql = "DELETE FROM `cliente` WHERE `cliente`.`cpf_Cliente` = "+cpf;
+        let sql = "DELETE FROM `cliente` WHERE `cliente`.`cpf_Cliente` = '"+cpf+"'";
         
         var rows = await conexao.ExecutaComando(sql);
 
