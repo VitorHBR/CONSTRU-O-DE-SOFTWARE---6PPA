@@ -8,6 +8,7 @@ class ProdutoModel {
     #nome;
     #descricao
     #preco;
+    #quantidade;
     #receita_idReceita;
     #Categoria_idCategoria;
    
@@ -17,16 +18,18 @@ class ProdutoModel {
     get nome() { return this.#nome; } set nome(nome) {this.#nome = nome;}
     get descricao() { return this.#descricao; } set descricao(descricao) {this.#descricao = descricao;}
     get preco() { return this.#preco; } set preco(preco) {this.#preco = preco;}
+    get quantidade() { return this.#quantidade; } set quantidade(quantidade) {this.#quantidade = quantidade;}
     get receita_idReceita() { return this.#receita_idReceita; } set receita_idReceita(receita_idReceita) {this.#receita_idReceita = receita_idReceita;}
     get Categoria_idCategoria() { return this.#Categoria_idCategoria; } set Categoria_idCategoria(Categoria_idCategoria) {this.#Categoria_idCategoria = Categoria_idCategoria;}
     
    
 
-    constructor(codigo_Produto, nome,descricao, preco, receita_idReceita, Categoria_idCategoria) {
+    constructor(codigo_Produto, nome, descricao, preco, quantidade, receita_idReceita, Categoria_idCategoria) {
         this.#codigo_Produto = codigo_Produto
         this.#nome = nome
         this.#descricao = descricao
         this.#preco = preco
+        this.#quantidade = quantidade
         this.#receita_idReceita = receita_idReceita
         this.#Categoria_idCategoria = Categoria_idCategoria;
         
@@ -45,7 +48,7 @@ class ProdutoModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'],row['receitanome'],row['categoriadescricao']));
+                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'], row['quantidade'],row['receitanome'],row['categoriadescricao']));
                 
                 
             }
@@ -66,7 +69,7 @@ class ProdutoModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'],row['receita_idReceita'],row['Categoria_idCategoria']));
+                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'], row['quantidade'],row['receita_idReceita'],row['Categoria_idCategoria']));
                 
                 
             }
@@ -79,7 +82,7 @@ class ProdutoModel {
 
     async cadastrarProdutos() {
 
-        let sql = "INSERT INTO `produto`(`nome`, `descricao`, `preco`, `receita_idReceita`, `Categoria_idCategoria`) VALUES ('"+this.#nome+"','"+this.#descricao+"','"+this.#preco+"','"+this.receita_idReceita+"','"+this.#Categoria_idCategoria+"')";
+        let sql = "INSERT INTO `produto`(`nome`, `descricao`, `preco`, `quantidade`, `receita_idReceita`, `Categoria_idCategoria`) VALUES ('"+this.#nome+"','"+this.#descricao+"','"+this.#preco+"','"+this.#quantidade+"','"+this.receita_idReceita+"','"+this.#Categoria_idCategoria+"')";
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -99,7 +102,7 @@ class ProdutoModel {
     
     async alterarProdutos() {
 
-        let sql = "UPDATE `produto` SET `nome` = '"+this.#nome+"', `descricao` = '"+this.#descricao+"', `preco` = '"+this.#preco+"', `receita_idReceita` = '"+this.receita_idReceita+"', `Categoria_idCategoria` = '"+this.#Categoria_idCategoria+"' WHERE `produto`.`codigo_Produto` = "+this.#codigo_Produto+"";
+        let sql = "UPDATE `produto` SET `nome` = '"+this.#nome+"', `descricao` = '"+this.#descricao+"', `preco` = '"+this.#preco+"', `quantidade` = '"+this.#quantidade+"', `receita_idReceita` = '"+this.receita_idReceita+"', `Categoria_idCategoria` = '"+this.#Categoria_idCategoria+"' WHERE `produto`.`codigo_Produto` = "+this.#codigo_Produto+"";
         
         var rows = await conexao.ExecutaComando(sql);
 

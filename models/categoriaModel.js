@@ -5,16 +5,16 @@ class CategoriaModel {
    
     
     #idCategoria;
-    #descricao;
+    #categoriaDescricao;
          
     get idCategoria() { return this.#idCategoria; } set idCategoria(idCategoria) {this.#idCategoria = idCategoria;}
-    get descricao() { return this.#descricao; } set descricao(descricao) {this.#descricao = descricao;}
+    get categoriaDescricao() { return this.#categoriaDescricao; } set categoriaDescricao(categoriaDescricao) {this.#categoriaDescricao = categoriaDescricao;}
     
    
 
-    constructor(idCategoria,descricao) {
+    constructor(idCategoria,categoriaDescricao) {
         this.#idCategoria = idCategoria;
-        this.#descricao = descricao;     
+        this.#categoriaDescricao = categoriaDescricao;     
         
         
        
@@ -32,7 +32,7 @@ class CategoriaModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new CategoriaModel(row['idCategoria'], row['categoriadescricao']));
+                listaRetorno.push(new CategoriaModel(row['idCategoria'], row['categoriaDescricao']));
                 
                 
             }
@@ -44,7 +44,7 @@ class CategoriaModel {
 
     async buscarCategorias() {
 
-        let sql = "SELECT * FROM `categoria` WHERE `categoriadescricao` LIKE '%"+this.descricao+"%'";
+        let sql = "SELECT * FROM `categoria` WHERE `categoriaDescricao` LIKE '%"+this.categoriaDescricao+"%'";
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -53,7 +53,7 @@ class CategoriaModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new CategoriaModel(row['idCategoria'], row['categoriadescricao']));
+                listaRetorno.push(new CategoriaModel(row['idCategoria'], row['categoriaDescricao']));
                 
                 
             }
@@ -67,7 +67,7 @@ class CategoriaModel {
 
     async cadastrarCategorias() {
 
-        let sql = "INSERT INTO `categoria` (`idCategoria`, `categoriadescricao`) VALUES (NULL, '"+this.#descricao+"')";
+        let sql = "INSERT INTO `categoria` (`idCategoria`, `categoriaDescricao`) VALUES (NULL, '"+this.#categoriaDescricao+"')";
         
         var rows = await conexao.ExecutaComando(sql);
         
@@ -87,7 +87,7 @@ class CategoriaModel {
     
     async alterarCategorias() {
 
-        let sql = "UPDATE `categoria` SET `descricao` = '"+this.#descricao+"' WHERE `categoria`.`idCategoria` = "+this.#idCategoria;
+        let sql = "UPDATE `categoria` SET `categoriaDescricao` = '"+this.#categoriaDescricao+"' WHERE `categoria`.`idCategoria` = "+this.#idCategoria;
         
         var rows = await conexao.ExecutaComando(sql);
         
@@ -95,5 +95,6 @@ class CategoriaModel {
     }
 
 }
+
 
 module.exports = CategoriaModel;

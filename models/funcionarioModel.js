@@ -4,36 +4,34 @@ const conexao = new Database();
 class FuncionarioModel {
    
     
-    #idfuncionario;
+    #idFuncionario;
     #nome;
     #telefone
-    #email;
     #endereco;
-    #departamento;
-    #cargo;
+    #email;
+    #senha;
+    
 
    
     
 
-    get idfuncionario() { return this.#idfuncionario; } set idfuncionario(idfuncionario) {this.#idfuncionario = idfuncionario;}
+    get idFuncionario() { return this.#idFuncionario; } set idFuncionario(idFuncionario) {this.#idFuncionario = idFuncionario;}
     get nome() { return this.#nome; } set nome(nome) {this.#nome = nome;}
     get telefone() { return this.#telefone; } set telefone(telefone) {this.#telefone = telefone;}
     get email() { return this.#email; } set email(email) {this.#email = email;}
     get endereco() { return this.#endereco; } set endereco(endereco) {this.#endereco = endereco;}
-    get departamento() { return this.#departamento; } set departamento(departamento) {this.#departamento = departamento;}
-    get cargo() { return this.#cargo; } set cargo(cargo) {this.#cargo = cargo;}
+    get senha() { return this.#senha; } set senha(senha) {this.#senha = senha;}
 
     
    
 
-    constructor(idfuncionario, nome, telefone, email, endereco, departamento, cargo) {
-        this.#idfuncionario = idfuncionario
+    constructor(idFuncionario, nome, telefone, endereco, email, senha) {
+        this.#idFuncionario = idFuncionario
         this.#nome = nome
         this.#telefone = telefone
-        this.#email = email
         this.#endereco = endereco
-        this.#departamento = departamento
-        this.#cargo = cargo
+        this.#email = email
+        this.#senha = senha
        
     }
         
@@ -49,7 +47,7 @@ class FuncionarioModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'], row['email'],row['endereco'],row['departamento'],row['cargo']));
+                listaRetorno.push(new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'],row['endereco'], row['email']));
                 
             }
         }
@@ -69,7 +67,7 @@ class FuncionarioModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'], row['email'],row['endereco'],row['departamento'],row['cargo']));
+                listaRetorno.push(new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'],row['endereco'], row['email'],row['senha']));
                 
                 
             }
@@ -82,7 +80,7 @@ class FuncionarioModel {
 
     async cadastrarFuncionarios() {
 
-        let sql = "INSERT INTO `funcionario`(`idFuncionario`, `nome`, `telefone`, `email`, `endereco`, `departamento`, `cargo`) VALUES ('"+this.#idfuncionario+"', '"+this.#nome+"','"+this.#telefone+"','"+this.#email+"','"+this.endereco+"','"+this.departamento+"','"+this.cargo+"')";
+        let sql = "INSERT INTO `funcionario`(`idFuncionario`, `nome`, `telefone`, `endereco`, `email`, `senha`) VALUES ('"+this.#idFuncionario+"', '"+this.#nome+"','"+this.#telefone+"','"+this.endereco+"','"+this.#email+"','"+this.#senha+"')";
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -90,9 +88,9 @@ class FuncionarioModel {
     }
 
 
-    async deletarFuncionario(idfuncionario) {
+    async deletarFuncionario(idFuncionario) {
 
-        let sql = "DELETE FROM `funcionario` WHERE `funcionario`.`idFuncionario` = "+idfuncionario;
+        let sql = "DELETE FROM `funcionario` WHERE `funcionario`.`idFuncionario` = "+idFuncionario;
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -101,9 +99,9 @@ class FuncionarioModel {
 
     
     async alterarFuncionarios() {
-        let sql = "UPDATE `funcionario` SET `nome` = ?, `telefone` = ?, `email` = ?, `endereco` = ?, `departamento` = ?,  `cargo` = ? WHERE `funcionario`.`idFuncionario` = ?";
+        let sql = "UPDATE `funcionario` SET `nome` = ?, `telefone` = ?, `endereco` = ?, `email` = ? , `senha` = ? WHERE `funcionario`.`idFuncionario` = ?";
       
-        var values = [this.#nome, this.#telefone, this.#email, this.endereco, this.departamento, this.cargo, this.#idfuncionario];
+        var values = [this.#nome, this.#telefone, this.endereco, this.#email, this.senha, this.#idFuncionario];
       
         var rows = await conexao.ExecutaComando(sql, values);
       
@@ -117,7 +115,7 @@ class FuncionarioModel {
         var row = await conexao.ExecutaComando(sql);
 
         if(row.length > 0)
-            return new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'], row['email'],row['endereco'],row['departamento'],row['cargo'])
+            return new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'], row['endereco'], row['email'])
         else 
             return null;
     } 

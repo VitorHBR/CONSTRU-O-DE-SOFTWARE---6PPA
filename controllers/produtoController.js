@@ -30,6 +30,7 @@ class ProdutoController {
         prod.nome= req.body.nome;
         prod.descricao=req.body.descricao;
         prod.preco=req.body.preco;
+        prod.quantidade=req.body.quantidade;
         prod.receita_idReceita=req.body.receita;
         prod.Categoria_idCategoria=req.body.categoria;
 
@@ -54,10 +55,10 @@ class ProdutoController {
         console.log(req.body);
         let prod = new ProdutoModel();
 
-        prod.codigo_Produto= req.body.codigo
         prod.nome= req.body.nome;
         prod.descricao=req.body.descricao;
         prod.preco=req.body.preco;
+        prod.quantidade=req.body.quantidade;
         prod.receita_idReceita=req.body.receita;
         prod.Categoria_idCategoria=req.body.categoria;
 

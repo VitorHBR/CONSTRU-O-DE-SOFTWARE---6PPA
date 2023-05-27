@@ -42,7 +42,7 @@
               </div>
               <div class="mb-3">
                 <label for="endereco" class="col-form-label">Endereço:</label>
-                <textarea name="endereco" class="form-control" id="endereco"></textarea>
+                <input name="endereco" type="text" class="form-control" id="endereco">
               </div>
               <button class="btn btn-primary" type="submit">Cadastrar</button>
             </form>
@@ -97,7 +97,6 @@
                     <div class="modal-dialog">
                       <div class="modal-content">
                         <div class="modal-header">
-
                           <h1 class="modal-title fs-5" id="exampleAlterar<%= value.cpf_Cliente %>Label">Alterar Cliente</h1>
                           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
@@ -109,25 +108,20 @@
                               <input name="nome" type="text" class="form-control" id="alterarnome"
                                 value="<%= value.nome %>">
                             </div>
-
-
                             <div class="mb-3">
                               <label for="alterartelefone" class="col-form-label">Telefone:</label>
                               <input name="telefone" class="form-control" id="alterartelefone"
                                 value="<%= value.telefone %>">
                             </div>
-
-
                             <div class="mb-3">
                               <label for="alteraremail" class="col-form-label">E-mail:</label>
                               <input name="email" type="email" class="form-control" id="alteraremail"
                                 value="<%= value.email %>">
                             </div>
-
                             <div class="mb-3">
                               <label for="alterarendereco" class="col-form-label">Endereço:</label>
-                              <textarea name="endereco" class="form-control"
-                                id="alterarendereco"><%= value.endereco %></textarea>
+                              <input name="endereco" type="text" class="form-control" id="alterarendereco"
+                                value="<%= value.endereco %>">
                             </div>
                               <button class="btn btn-primary" type="submit">Alterar</button>
                           </form>

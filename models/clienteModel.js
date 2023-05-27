@@ -20,7 +20,7 @@ class ClienteModel {
     
    
 
-    constructor(cpf_Cliente, nome, telefone, email, endereco,) {
+    constructor(cpf_Cliente, nome, telefone, email, endereco) {
         this.#cpf_Cliente = cpf_Cliente
         this.#nome = nome
         this.#telefone = telefone

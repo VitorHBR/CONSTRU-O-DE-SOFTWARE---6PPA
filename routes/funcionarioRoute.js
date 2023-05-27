@@ -20,7 +20,7 @@ class FuncionarioRoute {
         this.#router.post('/cadastrarfuncionario',auth.usuarioEstaLogado, ctrl.cadastrarFuncionario);
         this.#router.post('/alterarfuncionario',auth.usuarioEstaLogado, ctrl.alterarFuncionario);
         this.#router.post('/buscarfuncionario',auth.usuarioEstaLogado, ctrl.buscarFuncionario);
-        this.#router.get('/deletarfuncionario/:idfuncionario',auth.usuarioEstaLogado, ctrl.deletarFuncionario);
+        this.#router.get('/deletarfuncionario/:idFuncionario',auth.usuarioEstaLogado, ctrl.deletarFuncionario);
     }
 }
 

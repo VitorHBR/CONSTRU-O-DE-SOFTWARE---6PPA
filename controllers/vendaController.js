@@ -11,4 +11,5 @@ class VendaController {
 }
 
 
+
 module.exports = VendaController;

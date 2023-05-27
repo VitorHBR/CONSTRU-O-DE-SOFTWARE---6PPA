@@ -26,13 +26,13 @@ class FuncionarioController {
         console.log(req.body);
         let cli = new FuncionarioModel();
 
-        cli.idfuncionario = req.body.idfuncionario;
+        cli.idFuncionario = req.body.idFuncionario;
         cli.nome= req.body.nome;
         cli.telefone=req.body.telefone;
-        cli.email=req.body.email;
         cli.endereco=req.body.endereco;
-        cli.departamento=req.body.departamento;
-        cli.cargo=req.body.cargo;
+        cli.email=req.body.email;
+        cli.senha=req.body.senha;
+       
 
 
 
@@ -42,10 +42,10 @@ class FuncionarioController {
     }
 
     async deletarFuncionario(req, res) {
-        console.log(req.params.idfuncionario);
-        //req.params.idfuncionario
+        console.log(req.params.idFuncionario);
+        //req.params.idFuncionario
         let cli = new FuncionarioModel();
-        let retorno = await cli.deletarFuncionario(req.params.idfuncionario);
+        let retorno = await cli.deletarFuncionario(req.params.idFuncionario);
         let lista = await cli.listarFuncionarios();
         res.render('funcionario/listar', {lista: lista});
         
@@ -57,13 +57,12 @@ class FuncionarioController {
         console.log(req.body);
         let cli = new FuncionarioModel();
 
-        cli.idfuncionario = req.body.idfuncionario;
+        cli.idFuncionario = req.body.idFuncionario;
         cli.nome= req.body.nome;
         cli.telefone=req.body.telefone;
-        cli.email=req.body.email;
         cli.endereco=req.body.endereco;
-        cli.departamento=req.body.departamento;
-        cli.cargo=req.body.cargo;
+        cli.email=req.body.email;
+        cli.senha=req.body.senha;
 
 
         let retorno = await cli.alterarFuncionarios();

@@ -11,7 +11,7 @@ class CategoriaController {
 
     async buscarCategoria(req, res) {
         let prod = new CategoriaModel();
-        prod.descricao= req.body.busca;
+        prod.categoriaDescricao= req.body.busca;
         let lista = await prod.buscarCategorias();
         res.render('categoria/listar', {lista: lista});
     }
@@ -27,7 +27,7 @@ class CategoriaController {
         let prod = new CategoriaModel();
   
         
-        prod.descricao=req.body.descricao;
+        prod.categoriaDescricao=req.body.categoriaDescricao;
 
         let retorno = await prod.cadastrarCategorias();
         let lista = await prod.listarCategorias();
@@ -51,7 +51,7 @@ class CategoriaController {
         let prod = new CategoriaModel();
 
         prod.idCategoria= req.body.codigo
-        prod.descricao=req.body.descricao;
+        prod.categoriaDescricao=req.body.categoriaDescricao;
         
 
         let retorno = await prod.alterarCategorias();

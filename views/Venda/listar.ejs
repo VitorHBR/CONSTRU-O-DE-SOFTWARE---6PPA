@@ -38,15 +38,7 @@
           </thead>
           <tbody id="lista-produtos">
             <tr>
-              <td>teste</td>
-              <td>teste</td>
-              <td>teste</td>
-              <td>teste</td>
-              <td>
-                <div>
-                  <a class="btn btn-danger" role="button"><i class="fas fa-trash"></i></a>
-                </div>
-              </td>
+              <!-- Onde vai listar os produtos  -->
             </tr>
           </tbody>
         </table>
@@ -92,5 +84,122 @@
 
 
 <script>
-    //código JavaScript para manipular os eventos e cálculos da tela pode ser adicionado aqui
+  // Variáveis para armazenar os dados da venda
+  let produtos = [];
+  let total = 0.00;
+
+  // Função para calcular o valor com base na quantidade
+  function calcularValor() {
+    const quantidade = parseFloat(document.getElementById('quantidade').value);
+    const valor = quantidade * 10.00; // Substitua 10.00 pelo valor do produto
+
+    document.getElementById('valor').value = valor.toFixed(2); // Exibe o valor formatado com 2 casas decimais
+  }
+
+  // Função para adicionar o produto à lista
+  function adicionarProduto() {
+    const produto = document.getElementById('produto').value;
+    const quantidade = parseFloat(document.getElementById('quantidade').value);
+    const valor = parseFloat(document.getElementById('valor').value);
+
+    // Verifica se o código do produto é válido
+    if (produto === '') {
+      alert('Digite um código de produto válido!');
+      return;
+    }
+
+    // Cria o objeto do produto
+    const novoProduto = {
+      produto: produto,
+      quantidade: quantidade,
+      valor: valor
+    };
+
+    // Adiciona o produto à lista
+    produtos.push(novoProduto);
+
+    // Atualiza a tabela de produtos
+    atualizarTabela();
+
+    // Limpa os campos do formulário
+    document.getElementById('produto').value = '';
+    document.getElementById('quantidade').value = '';
+    document.getElementById('valor').value = '';
+
+    // Calcula o novo total
+    total += valor;
+    document.getElementById('total').textContent = total.toFixed(2);
+  }
+
+  // Função para atualizar a tabela de produtos
+  function atualizarTabela() {
+    const listaProdutos = document.getElementById('lista-produtos');
+    listaProdutos.innerHTML = '';
+
+    for (const produto of produtos) {
+      const row = document.createElement('tr');
+      row.innerHTML = `
+        <td>${produto.produto}</td>
+        <td>${produto.nomeProduto}</td>
+        <td>${produto.quantidade}</td>
+        <td>${produto.valor.toFixed(2)}</td>
+        <td>
+          <a class="btn btn-danger" role="button" onclick="removerProduto('${produto.produto}')"><i class="fas fa-trash"></i></a>
+        </td>
+      `;
+      listaProdutos.appendChild(row);
+    }
+  }
+
+  // Função para remover um produto da lista
+  function removerProduto(produto) {
+    const index = produtos.findIndex(item => item.produto === produto);
+    if (index !== -1) {
+      const valor = produtos[index].valor;
+      produtos.splice(index, 1);
+
+      // Atualiza a tabela de produtos
+      atualizarTabela();
+
+      // Calcula o novo total
+      total -= valor;
+      document.getElementById('total').textContent = total.toFixed(2);
+    }
+  }
+
+  // Função para abrir o modal de seleção do cliente
+  function selecionarCliente() {
+    const modalCliente = new bootstrap.Modal(document.getElementById('modalCliente'));
+    modalCliente.show();
+  }
+
+  // Função para finalizar a venda
+  function finalizarVenda() {
+    const cliente = document.getElementById('selectCliente').value;
+
+    // Verifica se o cliente foi selecionado
+    if (cliente === '') {
+      alert('Selecione um cliente antes de finalizar a venda!');
+      return;
+    }
+
+    // Envia os dados da venda para o servidor ou realiza outras ações necessárias
+    console.log('Venda finalizada!');
+    console.log('Cliente:', cliente);
+    console.log('Produtos:', produtos);
+    console.log('Total:', total);
+
+    // Reinicializa as variáveis
+    produtos = [];
+    total = 0.00;
+
+    // Limpa a tabela de produtos e o total
+    atualizarTabela();
+    document.getElementById('total').textContent = total.toFixed(2);
+  }
+
+  // Event listeners
+  document.getElementById('quantidade').addEventListener('input', calcularValor);
+  document.getElementById('adicionar').addEventListener('click', adicionarProduto);
+  document.getElementById('finalizar').addEventListener('click', finalizarVenda);
 </script>
