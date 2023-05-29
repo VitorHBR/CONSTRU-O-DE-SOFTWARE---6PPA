@@ -48,7 +48,7 @@ class ProdutoModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'], row['quantidade'],row['receitanome'],row['categoriadescricao']));
+                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'], row['quantidade'],row['receitanome'],row['categoriaDescricao'],row['receita_idReceita'],row['Categoria_idCategoria']));
                 
                 
             }
@@ -60,7 +60,7 @@ class ProdutoModel {
 
     async buscarProdutos() {
 
-        let sql = "SELECT * FROM `produto` WHERE `nome` LIKE '%"+this.#nome+"%'";
+        let sql = "SELECT * FROM produto LEFT JOIN categoria ON produto.Categoria_idCategoria = categoria.idCategoria LEFT JOIN receita ON produto.receita_idReceita = receita.idReceita WHERE `nome` LIKE '%"+this.#nome+"%'";
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -69,7 +69,7 @@ class ProdutoModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'], row['quantidade'],row['receita_idReceita'],row['Categoria_idCategoria']));
+                listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'], row['quantidade'],row['receitanome'],row['categoriaDescricao'],row['receita_idReceita'],row['Categoria_idCategoria']));
                 
                 
             }

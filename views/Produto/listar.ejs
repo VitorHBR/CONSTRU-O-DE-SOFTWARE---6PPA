@@ -1,5 +1,7 @@
 <!--Para fazer com fetch-->
 <script src="/js/Produto/listar.js"></script>
+<script src="/js/Categoria/listar.js"></script>
+<script src="/js/Receita/listar.js"></script>
 
 <div>
   <h1>Produtos</h1>
@@ -10,7 +12,7 @@
           <input class="form-control me-2" type="search" placeholder="Procurar" aria-label="Search" name="busca">
           <button class="btn btn-outline-success" type="submit">Buscar</button>
         </form>
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
+        <button type="button" onclick="listarcategoriacad(),listarreceitacad()" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal"
           data-bs-whatever="@mdo"><i class="fas fa-plus"></i> Cadastrar</button>
       </div>
     </nav>
@@ -19,10 +21,10 @@
         <div class="modal-content">
           <div class="modal-header">
             <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastrar Novo Produto</h1>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button"  class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form method="post" action="/produto/cadastrarproduto">
+            <form method="post"  action="/produto/cadastrarproduto">
               <div class="mb-3">
                 <label for="recipient-name" class="col-form-label">Nome:</label>
                 <input name="nome" type="text" class="form-control" id="nome">
@@ -41,11 +43,15 @@
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Receita:</label>
-                <textarea name="receita" class="form-control" id="receita"></textarea>
+                <select id="receita" name="receita" class="form-select" aria-label="Default select example">
+                  
+                </select>
               </div>
               <div class="mb-3">
                 <label for="message-text" class="col-form-label">Categoria:</label>
-                <textarea name="categoria" class="form-control" id="categoria"></textarea>
+                <select id="categoria" name="categoria" class="form-select" aria-label="Default select example">
+                  
+                </select>
               </div>
               <button class="btn btn-primary" type="submit">Cadastrar</button>
             </form>
@@ -98,7 +104,7 @@
             <td>
               <div class="d-flex">
                 <div class="me-1">
-                  <button onclick="alterar('<%= value.nome %>')" type="button" class="btn btn-primary"
+                  <button onclick="listarcategoriaalt('<%= value.codigo_Produto %>','<%= value.Categoria_idCategoria %>','<%= value.Categoria_categoriaDescricao %>'),listarreceitaalt('<%= value.codigo_Produto %>')" type="button" class="btn btn-primary"
                     data-bs-toggle="modal" data-bs-target="#exampleAlterar<%= value.codigo_Produto %>"
                     data-bs-whatever="@alterar"><i class="fas fa-pen"></i></button>
                   <div class="modal fade" id="exampleAlterar<%= value.codigo_Produto %>" tabindex="-1"
@@ -136,13 +142,15 @@
                             </div>
                             <div class="mb-3">
                               <label for="message-text" class="col-form-label">Receita:</label>
-                              <textarea name="receita" class="form-control"
-                                id="alterarreceita"><%= value.receita_idReceita %></textarea>
+                              <select id="receitaalt<%= value.codigo_Produto %>" name="receitaalt" class="form-select" aria-label="Default select example" required="required">
+                  
+                              </select>
                             </div>
                             <div class="mb-3">
                               <label for="message-text" class="col-form-label">Categoria:</label>
-                              <textarea name="categoria" class="form-control"
-                                id="alterarcategoria"><%= value.Categoria_idCategoria %></textarea>
+                              <select id="categoriaalt<%= value.codigo_Produto %>" name="categoriaalt" class="form-select" aria-label="Default select example" required="required">
+                  
+                              </select>                            
                             </div>
                             <button class="btn btn-primary" type="submit">Alterar</button>
                           </form>

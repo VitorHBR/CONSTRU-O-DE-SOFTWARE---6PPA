@@ -17,6 +17,7 @@ class ReceitaRoute {
         let auth = new Autenticacao();
         let ctrl = new ReceitaController
         this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
+        this.#router.get('/listarfetch',auth.usuarioEstaLogado, ctrl.listarJson);
         this.#router.post('/cadastrarreceita',auth.usuarioEstaLogado, ctrl.cadastrarReceita);
         this.#router.post('/alterarreceita',auth.usuarioEstaLogado, ctrl.alterarReceita);
         this.#router.post('/buscarreceita',auth.usuarioEstaLogado, ctrl.buscarReceita);

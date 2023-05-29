@@ -19,7 +19,12 @@ class ReceitaController {
     async listarJson(req, res) {
         let prod = new ReceitaModel();
         let lista = await prod.listarReceitas();
-        res.send(lista);
+        var retorno=[];
+        for (var index = 0; index < lista.length; index++) 
+        {  retorno.push([lista[index].idReceita,lista[index].nome]) ;
+       
+        }
+        res.send(retorno);
     }
 
     async cadastrarReceita(req, res) {

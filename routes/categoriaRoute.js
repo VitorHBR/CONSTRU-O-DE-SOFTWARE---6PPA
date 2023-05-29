@@ -18,6 +18,7 @@ class CategoriaRoute {
         let ctrl = new CategoriaController
         let auth = new Autenticacao();
         this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
+        this.#router.get('/listarfetch',auth.usuarioEstaLogado, ctrl.listarJson);
         this.#router.post('/cadastrarcategoria',auth.usuarioEstaLogado, ctrl.cadastrarCategoria);
         this.#router.post('/alterarcategoria',auth.usuarioEstaLogado, ctrl.alterarCategoria);
         this.#router.post('/buscarcategoria',auth.usuarioEstaLogado, ctrl.buscarCategoria);

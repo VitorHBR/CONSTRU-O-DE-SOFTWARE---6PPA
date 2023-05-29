@@ -2,6 +2,9 @@ const CategoriaModel = require("../models/categoriaModel");
 
 class CategoriaController {
 
+    
+
+
     async listarView(req, res) {
         let prod = new CategoriaModel();
         let lista = await prod.listarCategorias();
@@ -18,8 +21,13 @@ class CategoriaController {
 
     async listarJson(req, res) {
         let prod = new CategoriaModel();
-        let lista = await prod.listarCategoria();
-        res.send(lista);
+        let lista = await prod.listarCategorias();
+        var retorno=[];
+        for (var index = 0; index < lista.length; index++) 
+        {  retorno.push([lista[index].idCategoria,lista[index].categoriaDescricao]) ;
+       
+        }
+        res.send(retorno);
     }
 
     async cadastrarCategoria(req, res) {

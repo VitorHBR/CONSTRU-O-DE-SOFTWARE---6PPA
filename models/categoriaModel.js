@@ -21,6 +21,8 @@ class CategoriaModel {
     }
         
 
+
+    
     async listarCategorias() {
 
         let sql = 'SELECT * FROM `categoria`';
