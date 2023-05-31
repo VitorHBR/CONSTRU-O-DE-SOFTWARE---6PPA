@@ -32,7 +32,7 @@ class ClienteModel {
 
     async listarClientes() {
 
-        let sql = 'SELECT * FROM `cliente`';
+        let sql = 'SELECT * FROM `cliente` ORDER BY `cliente`.`nome` ASC';
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -52,7 +52,7 @@ class ClienteModel {
 
     async buscarClientes() {
 
-        let sql = "SELECT * FROM `cliente` WHERE `nome` LIKE '%"+this.#nome+"%'";
+        let sql = "SELECT * FROM `cliente` WHERE `nome` LIKE '%"+this.#nome+"%' ORDER BY `cliente`.`nome` ASC";
         
         var rows = await conexao.ExecutaComando(sql);
 

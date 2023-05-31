@@ -18,6 +18,7 @@ class ClienteRoute {
         let ctrl = new ClienteController
         let auth = new Autenticacao();
         this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
+        this.#router.get('/listarfetch',auth.usuarioEstaLogado, ctrl.listarJson);
         this.#router.post('/cadastrarcliente',auth.usuarioEstaLogado, ctrl.cadastrarCliente);
         this.#router.post('/alterarcliente',auth.usuarioEstaLogado, ctrl.alterarCliente);
         this.#router.post('/buscarcliente',auth.usuarioEstaLogado, ctrl.buscarCliente);

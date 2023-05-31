@@ -25,7 +25,7 @@ class CategoriaModel {
     
     async listarCategorias() {
 
-        let sql = 'SELECT * FROM `categoria`';
+        let sql = 'SELECT * FROM `categoria` ORDER BY `categoria`.`categoriaDescricao` ASC';
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -46,7 +46,7 @@ class CategoriaModel {
 
     async buscarCategorias() {
 
-        let sql = "SELECT * FROM `categoria` WHERE `categoriaDescricao` LIKE '%"+this.categoriaDescricao+"%'";
+        let sql = "SELECT * FROM `categoria` WHERE `categoriaDescricao` LIKE  '%"+this.categoriaDescricao+"%' ORDER BY `categoria`.`categoriaDescricao` ASC";
         
         var rows = await conexao.ExecutaComando(sql);
 

@@ -1,205 +1,208 @@
-<div class="container">
-  <h1 class="mt-4">Controle de Vendas</h1>
+<script src="/js/Cliente/listar.js"></script>
 
-  <div class="mt-4">
-    <form>
-      <div class="row">
-        <div class="col-md-6">
-          <div class="form-group">
-            <label for="produto">Produto:</label>
-            <input type="text" class="form-control" id="produto">
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="form-group">
-            <label for="quantidade">Quantidade:</label>
-            <input type="number" class="form-control" id="quantidade">
-          </div>
-        </div>
-        <div class="col-md-3">
-          <div class="form-group">
-            <label for="valor">Valor:</label>
-            <input type="text" class="form-control" id="valor" readonly>
-          </div>
-        </div>
-      </div>
-
-      <button type="button" class="btn btn-primary mt-3" id="adicionar">Adicionar</button>
-      <div class="table-responsive" style="margin-top: 15px;">
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>Código</th>
-              <th>Produto</th>
-              <th>Quantidade</th>
-              <th>Valor</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody id="lista-produtos">
-            <tr>
-              <!-- Onde vai listar os produtos  -->
-            </tr>
-          </tbody>
-        </table>
-      </div>
+<body onload="listarcliente()">
+  <div class="container"> 
+    <h1 class="mt-4">Controle de Vendas</h1>
+  
+    <div class="mt-4">
+      <form>
         <div class="row">
-          <div class="col">
-            <!-- Formulário para selecionar o pagamento -->
-            <form>
-              <div class="form-group">
-                <label for="pagamento">Pagamento:</label>
-                <select class="form-select" id="pagamento">
-                  <option value="">Selecione o meio de pagamento</option>
-                  <option value="pagamento1">Dinheiro</option>
-                  <option value="pagamento2">PIX</option>
-                  <option value="pagamento1">Cartão de Crédito</option>
-                  <option value="pagamento2">Cartão de Débito</option>
-                </select>
-              </div>
-            </form>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label for="produto">Produto:</label>
+              <input type="text" class="form-control" id="produto">
+            </div>
           </div>
-          <div class="col">
-            <!-- Formulário para selecionar o cliente -->
-            <form>
-              <div class="form-group">
-                <label for="cliente">Cliente:</label>
-                <select class="form-select" id="cliente">
-                  <option value="">Selecione um cliente</option>
-                  <option value="cliente1">Cliente 1</option>
-                  <option value="cliente2">Cliente 2</option>
-                </select>
-              </div>
-            </form>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="quantidade">Quantidade:</label>
+              <input type="number" class="form-control" id="quantidade">
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label for="valor">Valor:</label>
+              <input type="text" class="form-control" id="valor" readonly>
+            </div>
           </div>
         </div>
-      <div class="text-end">
-        <h4>Total: <span id="total">0.00</span></h4>
-      </div>
-
-      <button type="submit" class="btn btn-success mt-3">Finalizar Venda</button>
-    </form>
+  
+        <button type="button" class="btn btn-primary mt-3" id="adicionar">Adicionar</button>
+        <div class="table-responsive" style="margin-top: 15px;">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Valor</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody id="lista-produtos">
+              <tr>
+                <!-- Onde vai listar os produtos  -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+          <div class="row">
+            <div class="col">
+              <!-- Formulário para selecionar o pagamento -->
+              <form>
+                <div class="form-group">
+                  <label for="pagamento">Pagamento:</label>
+                  <select class="form-select" id="pagamento">
+                    <option value="">Selecione o meio de pagamento</option>
+                    <option value="pagamento1">Dinheiro</option>
+                    <option value="pagamento2">PIX</option>
+                    <option value="pagamento1">Cartão de Crédito</option>
+                    <option value="pagamento2">Cartão de Débito</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+            <div class="col">
+              <!-- Formulário para selecionar o cliente -->
+              <form>
+                <div class="form-group">
+                  <label for="cliente">Cliente:</label>
+                  <select class="form-select" id="cliente" name="cliente">
+                    <!--Retorno de  cliente através de fetch api -->
+                    
+                  </select>
+                </div>
+              </form>
+            </div>
+          </div>
+        <div class="text-end">
+          <h4>Total: <span id="total">0.00</span></h4>
+        </div>
+  
+        <button type="submit" class="btn btn-success mt-3">Finalizar Venda</button>
+      </form>
+    </div>
   </div>
-</div>
-
-
-<script>
-  // Variáveis para armazenar os dados da venda
-  let produtos = [];
-  let total = 0.00;
-
-  // Função para calcular o valor com base na quantidade
-  function calcularValor() {
-    const quantidade = parseFloat(document.getElementById('quantidade').value);
-    const valor = quantidade * 10.00; // Substitua 10.00 pelo valor do produto
-
-    document.getElementById('valor').value = valor.toFixed(2); // Exibe o valor formatado com 2 casas decimais
-  }
-
-  // Função para adicionar o produto à lista
-  function adicionarProduto() {
-    const produto = document.getElementById('produto').value;
-    const quantidade = parseFloat(document.getElementById('quantidade').value);
-    const valor = parseFloat(document.getElementById('valor').value);
-
-    // Verifica se o código do produto é válido
-    if (produto === '') {
-      alert('Digite um código de produto válido!');
-      return;
+  
+  
+  <script>
+    // Variáveis para armazenar os dados da venda
+    let produtos = [];
+    let total = 0.00;
+  
+    // Função para calcular o valor com base na quantidade
+    function calcularValor() {
+      const quantidade = parseFloat(document.getElementById('quantidade').value);
+      const valor = quantidade * 10.00; // Substitua 10.00 pelo valor do produto
+  
+      document.getElementById('valor').value = valor.toFixed(2); // Exibe o valor formatado com 2 casas decimais
     }
-
-    // Cria o objeto do produto
-    const novoProduto = {
-      produto: produto,
-      quantidade: quantidade,
-      valor: valor
-    };
-
-    // Adiciona o produto à lista
-    produtos.push(novoProduto);
-
-    // Atualiza a tabela de produtos
-    atualizarTabela();
-
-    // Limpa os campos do formulário
-    document.getElementById('produto').value = '';
-    document.getElementById('quantidade').value = '';
-    document.getElementById('valor').value = '';
-
-    // Calcula o novo total
-    total += valor;
-    document.getElementById('total').textContent = total.toFixed(2);
-  }
-
-  // Função para atualizar a tabela de produtos
-  function atualizarTabela() {
-    const listaProdutos = document.getElementById('lista-produtos');
-    listaProdutos.innerHTML = '';
-
-    for (const produto of produtos) {
-      const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${produto.produto}</td>
-        <td>${produto.nomeProduto}</td>
-        <td>${produto.quantidade}</td>
-        <td>${produto.valor.toFixed(2)}</td>
-        <td>
-          <a class="btn btn-danger" role="button" onclick="removerProduto('${produto.produto}')"><i class="fas fa-trash"></i></a>
-        </td>
-      `;
-      listaProdutos.appendChild(row);
-    }
-  }
-
-  // Função para remover um produto da lista
-  function removerProduto(produto) {
-    const index = produtos.findIndex(item => item.produto === produto);
-    if (index !== -1) {
-      const valor = produtos[index].valor;
-      produtos.splice(index, 1);
-
+  
+    // Função para adicionar o produto à lista
+    function adicionarProduto() {
+      const produto = document.getElementById('produto').value;
+      const quantidade = parseFloat(document.getElementById('quantidade').value);
+      const valor = parseFloat(document.getElementById('valor').value);
+  
+      // Verifica se o código do produto é válido
+      if (produto === '') {
+        alert('Digite um código de produto válido!');
+        return;
+      }
+  
+      // Cria o objeto do produto
+      const novoProduto = {
+        produto: produto,
+        quantidade: quantidade,
+        valor: valor
+      };
+  
+      // Adiciona o produto à lista
+      produtos.push(novoProduto);
+  
       // Atualiza a tabela de produtos
       atualizarTabela();
-
+  
+      // Limpa os campos do formulário
+      document.getElementById('produto').value = '';
+      document.getElementById('quantidade').value = '';
+      document.getElementById('valor').value = '';
+  
       // Calcula o novo total
-      total -= valor;
+      total += valor;
       document.getElementById('total').textContent = total.toFixed(2);
     }
-  }
-
-  // Função para abrir o modal de seleção do cliente
-  function selecionarCliente() {
-    const modalCliente = new bootstrap.Modal(document.getElementById('modalCliente'));
-    modalCliente.show();
-  }
-
-  // Função para finalizar a venda
-  function finalizarVenda() {
-    const cliente = document.getElementById('selectCliente').value;
-
-    // Verifica se o cliente foi selecionado
-    if (cliente === '') {
-      alert('Selecione um cliente antes de finalizar a venda!');
-      return;
+  
+    // Função para atualizar a tabela de produtos
+    function atualizarTabela() {
+      const listaProdutos = document.getElementById('lista-produtos');
+      listaProdutos.innerHTML = '';
+  
+      for (const produto of produtos) {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td>${produto.produto}</td>
+          <td>${produto.nomeProduto}</td>
+          <td>${produto.quantidade}</td>
+          <td>${produto.valor.toFixed(2)}</td>
+          <td>
+            <a class="btn btn-danger" role="button" onclick="removerProduto('${produto.produto}')"><i class="fas fa-trash"></i></a>
+          </td>
+        `;
+        listaProdutos.appendChild(row);
+      }
     }
-
-    // Envia os dados da venda para o servidor ou realiza outras ações necessárias
-    console.log('Venda finalizada!');
-    console.log('Cliente:', cliente);
-    console.log('Produtos:', produtos);
-    console.log('Total:', total);
-
-    // Reinicializa as variáveis
-    produtos = [];
-    total = 0.00;
-
-    // Limpa a tabela de produtos e o total
-    atualizarTabela();
-    document.getElementById('total').textContent = total.toFixed(2);
-  }
-
-  // Event listeners
-  document.getElementById('quantidade').addEventListener('input', calcularValor);
-  document.getElementById('adicionar').addEventListener('click', adicionarProduto);
-  document.getElementById('finalizar').addEventListener('click', finalizarVenda);
-</script>
+  
+    // Função para remover um produto da lista
+    function removerProduto(produto) {
+      const index = produtos.findIndex(item => item.produto === produto);
+      if (index !== -1) {
+        const valor = produtos[index].valor;
+        produtos.splice(index, 1);
+  
+        // Atualiza a tabela de produtos
+        atualizarTabela();
+  
+        // Calcula o novo total
+        total -= valor;
+        document.getElementById('total').textContent = total.toFixed(2);
+      }
+    }
+  
+    // Função para abrir o modal de seleção do cliente
+    function selecionarCliente() {
+      const modalCliente = new bootstrap.Modal(document.getElementById('modalCliente'));
+      modalCliente.show();
+    }
+  
+    // Função para finalizar a venda
+    function finalizarVenda() {
+      const cliente = document.getElementById('selectCliente').value;
+  
+      // Verifica se o cliente foi selecionado
+      if (cliente === '') {
+        alert('Selecione um cliente antes de finalizar a venda!');
+        return;
+      }
+  
+      // Envia os dados da venda para o servidor ou realiza outras ações necessárias
+      console.log('Venda finalizada!');
+      console.log('Cliente:', cliente);
+      console.log('Produtos:', produtos);
+      console.log('Total:', total);
+  
+      // Reinicializa as variáveis
+      produtos = [];
+      total = 0.00;
+  
+      // Limpa a tabela de produtos e o total
+      atualizarTabela();
+      document.getElementById('total').textContent = total.toFixed(2);
+    }
+  
+    // Event listeners
+    document.getElementById('quantidade').addEventListener('input', calcularValor);
+    document.getElementById('adicionar').addEventListener('click', adicionarProduto);
+    document.getElementById('finalizar').addEventListener('click', finalizarVenda);
+  </script>
+</body>

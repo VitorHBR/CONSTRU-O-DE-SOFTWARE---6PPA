@@ -39,7 +39,7 @@ class ProdutoModel {
 
     async listarProdutos() {
 
-        let sql = 'SELECT * FROM produto LEFT JOIN categoria ON produto.Categoria_idCategoria = categoria.idCategoria LEFT JOIN receita ON produto.receita_idReceita = receita.idReceita';
+        let sql = 'SELECT * FROM produto LEFT JOIN categoria ON produto.Categoria_idCategoria = categoria.idCategoria LEFT JOIN receita ON produto.receita_idReceita = receita.idReceita ORDER BY `produto`.`nome` ASC';
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -60,7 +60,7 @@ class ProdutoModel {
 
     async buscarProdutos() {
 
-        let sql = "SELECT * FROM produto LEFT JOIN categoria ON produto.Categoria_idCategoria = categoria.idCategoria LEFT JOIN receita ON produto.receita_idReceita = receita.idReceita WHERE `nome` LIKE '%"+this.#nome+"%'";
+        let sql = "SELECT * FROM produto LEFT JOIN categoria ON produto.Categoria_idCategoria = categoria.idCategoria LEFT JOIN receita ON produto.receita_idReceita = receita.idReceita WHERE `nome` LIKE '%"+this.#nome+"% '";
         
         var rows = await conexao.ExecutaComando(sql);
 

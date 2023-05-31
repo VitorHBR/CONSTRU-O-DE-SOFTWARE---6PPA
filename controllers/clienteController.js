@@ -17,9 +17,14 @@ class ClienteController {
     }
 
     async listarJson(req, res) {
-        let cli = new ClienteModel();
-        let lista = await cli.listarClientes();
-        res.send(lista);
+        let prod = new ClienteModel();
+        let lista = await prod.listarClientes();
+        var retorno=[];
+        for (var index = 0; index < lista.length; index++) 
+        {  retorno.push([lista[index].cpf_Cliente,lista[index].nome]) ;
+       
+        }
+        res.send(retorno);
     }
 
     async cadastrarCliente(req, res) {
