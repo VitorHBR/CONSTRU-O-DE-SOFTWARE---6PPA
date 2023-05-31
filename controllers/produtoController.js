@@ -19,7 +19,12 @@ class ProdutoController {
     async listarJson(req, res) {
         let prod = new ProdutoModel();
         let lista = await prod.listarProdutos();
-        res.send(lista);
+        var retorno=[];
+        for (var index = 0; index < lista.length; index++) 
+        {  retorno.push([lista[index].codigo_Produto,lista[index].nome,lista[index].quantidade,lista[index].preco]) ;
+       
+        }
+        res.send(retorno);
     }
 
     async cadastrarProduto(req, res) {
