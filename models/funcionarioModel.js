@@ -113,9 +113,9 @@ class FuncionarioModel {
         const sql = "SELECT * FROM `funcionario` WHERE `email` LIKE '"+usuario+"' AND `senha` LIKE '"+senha+"'";
        
         var row = await conexao.ExecutaComando(sql);
-
+        
         if(row.length > 0)
-            return new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'], row['endereco'], row['email'])
+            return row;
         else 
             return null;
     } 

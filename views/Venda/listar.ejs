@@ -1,5 +1,6 @@
 <script src="/js/Cliente/listar.js"></script>
 <script src="/js/Produto/listar.js"></script>
+<script src="/js/Venda/listar.js"></script>
 
 <body onload="listarproduto(),listarcliente()">
   <div class="container">
@@ -59,10 +60,10 @@
                 <label for="pagamento">Pagamento:</label>
                 <select class="form-select" id="pagamento">
                   <option value="">Selecione o meio de pagamento</option>
-                  <option value="pagamento1">Dinheiro</option>
-                  <option value="pagamento2">PIX</option>
-                  <option value="pagamento1">Cartão de Crédito</option>
-                  <option value="pagamento2">Cartão de Débito</option>
+                  <option value="Dinheiro">Dinheiro</option>
+                  <option value="PIX">PIX</option>
+                  <option value="Cartao de Credito">Cartão de Crédito</option>
+                  <option value="Cartao de Debito">Cartão de Débito</option>
                 </select>
               </div>
             </form>
@@ -84,7 +85,7 @@
           <h4>Total: <span id="total">0.00</span></h4>
         </div>
 
-        <button type="submit" class="btn btn-success mt-3">Finalizar Venda</button>
+        <button type="submit" onclick="cadastrarvenda(new Date().toISOString(),total,document.getElementById('pagamento').value,document.getElementById('cliente').value,document.cookie,produtos)" class="btn btn-success mt-3">Finalizar Venda</button>
       </form>
     </div>
   </div>
