@@ -17,7 +17,7 @@ class VendaRoute {
         let auth = new Autenticacao();
         let ctrl = new VendaController
         this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
-       
+        this.#router.post('/finalizarvenda',auth.usuarioEstaLogado, ctrl.finalizarVenda);
     }
 }
 
