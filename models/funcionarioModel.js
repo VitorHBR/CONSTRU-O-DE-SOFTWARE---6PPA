@@ -47,7 +47,7 @@ class FuncionarioModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'],row['endereco'], row['email']));
+                listaRetorno.push(new FuncionarioModel(row['idFuncionario'], row['nome_funcionario'], row['telefone'],row['endereco'], row['email']));
                 
             }
         }
@@ -67,7 +67,7 @@ class FuncionarioModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new FuncionarioModel(row['idFuncionario'], row['nome'], row['telefone'],row['endereco'], row['email'],row['senha']));
+                listaRetorno.push(new FuncionarioModel(row['idFuncionario'], row['nome_funcionario'], row['telefone'],row['endereco'], row['email'],row['senha']));
                 
                 
             }
@@ -80,7 +80,7 @@ class FuncionarioModel {
 
     async cadastrarFuncionarios() {
 
-        let sql = "INSERT INTO `funcionario`(`idFuncionario`, `nome`, `telefone`, `endereco`, `email`, `senha`) VALUES ('"+this.#idFuncionario+"', '"+this.#nome+"','"+this.#telefone+"','"+this.endereco+"','"+this.#email+"','"+this.#senha+"')";
+        let sql = "INSERT INTO `funcionario`(`idFuncionario`, `nome_funcionario`, `telefone`, `endereco`, `email`, `senha`) VALUES ('"+this.#idFuncionario+"', '"+this.#nome+"','"+this.#telefone+"','"+this.endereco+"','"+this.#email+"','"+this.#senha+"')";
         
         var rows = await conexao.ExecutaComando(sql);
 
@@ -99,7 +99,7 @@ class FuncionarioModel {
 
     
     async alterarFuncionarios() {
-        let sql = "UPDATE `funcionario` SET `nome` = ?, `telefone` = ?, `endereco` = ?, `email` = ? , `senha` = ? WHERE `funcionario`.`idFuncionario` = ?";
+        let sql = "UPDATE `funcionario` SET `nome_funcionario` = ?, `telefone` = ?, `endereco` = ?, `email` = ? , `senha` = ? WHERE `funcionario`.`idFuncionario` = ?";
       
         var values = [this.#nome, this.#telefone, this.endereco, this.#email, this.senha, this.#idFuncionario];
       

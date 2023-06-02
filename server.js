@@ -5,6 +5,7 @@ const HomeRoute = require('./routes/homeRoute');
 const ProdutoRoute = require('./routes/produtoRoute');
 const CategoriaRoute = require('./routes/categoriaRoute');
 const ReceitaRoute = require('./routes/receitaRoute');
+const RelatorioRoute = require('./routes/relatorioRoute');
 const ClienteRoute = require ('./routes/clienteRoute');
 const FuncionarioRoute = require ('./routes/funcionarioRoute');
 const VendaRoute = require ('./routes/vendaRoute');
@@ -42,6 +43,8 @@ let funcionarioRota = new FuncionarioRoute();
 app.use('/funcionario', funcionarioRota.router);
 let vendaRota = new VendaRoute();
 app.use('/venda', vendaRota.router);
+let relatorioRota = new RelatorioRoute();
+app.use('/relatorio', relatorioRota.router);
 
 let loginRota = new LoginRoute();
 app.use('/login', loginRota.router);
