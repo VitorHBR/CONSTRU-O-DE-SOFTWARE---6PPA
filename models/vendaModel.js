@@ -41,7 +41,7 @@ class VendaModel {
         
 
     async cadastrarVenda() {
-
+        //cadastra a venda
         let sql = "INSERT INTO `venda` (`data_hora`, `valor_total`, `forma_pagamento`, `cliente_cpf_Cliente`, `funcionario_idFuncionario`) VALUES ('"+this.data_hora+"', '"+this.total+"', '"+this.forma_pagamento+"', '"+this.cliente_cpf_Cliente+"', '"+this.funcionario_idFuncionario+"')";
         
         var rows = await conexao.ExecutaComando(sql);
@@ -50,6 +50,34 @@ class VendaModel {
         for (let index = 0; index < this.produtos.length; index++) {
             sql="INSERT INTO `venda_has_produto` (`venda_idVenda`, `produto_codigo_Produto`, `quantidade`, `valor_unitario`) VALUES ('"+rows.insertId+"', '"+this.produtos[index].produto+"', '"+this.produtos[index].quantidade+"', '"+this.produtos[index].valor/this.produtos[index].quantidade+"')";
             var venda_has_produto = await conexao.ExecutaComando(sql);
+
+
+            
+
+
+
+        //atualiza estoque
+
+        sql = 'SELECT * FROM produto LEFT JOIN categoria ON produto.Categoria_idCategoria = categoria.idCategoria LEFT JOIN receita ON produto.receita_idReceita = receita.idReceita ORDER BY `produto`.`nome` ASC';
+        
+        var rowsproduto = await conexao.ExecutaComando(sql);
+
+        //let listaRetorno = [];
+
+        if(rowsproduto.length > 0){
+            for(let i=0; i<rowsproduto.length; i++){
+                var row = rowsproduto[i];
+               // listaRetorno.push(new ProdutoModel(row['codigo_Produto'], row['nome'], row['descricao'], row['preco'], row['quantidade'],row['receitanome'],row['categoriaDescricao'],row['receita_idReceita'],row['Categoria_idCategoria']));
+                if(row['codigo_Produto']==this.produtos[index].produto)
+                {   var quantidade =row['quantidade']-this.produtos[index].quantidade;
+                    
+                    sql = "UPDATE `produto` SET `quantidade` = '"+quantidade+"' WHERE `produto`.`codigo_Produto` = "+this.produtos[index].produto+"";
+                    
+                    var atualiza = await conexao.ExecutaComando(sql);
+                }
+                
+            }
+        }
         }
         
        
