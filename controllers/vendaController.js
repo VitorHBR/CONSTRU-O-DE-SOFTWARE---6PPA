@@ -1,5 +1,4 @@
 const VendaModel = require("../models/vendaModel");
-const vendaModel = require("../models/vendaModel");
 
 class VendaController {
 
