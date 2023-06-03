@@ -52,6 +52,28 @@ class RelatorioModel {
     }
 
 
+    async listarRelatorioExpandido(cod) {
+        
+        let sql = 'SELECT * FROM `venda_has_produto` LEFT JOIN venda ON venda_has_produto.venda_idVenda = venda.idVenda LEFT JOIN produto ON produto_codigo_Produto = produto.codigo_Produto WHERE `venda_idVenda` = '+cod;
+        
+        var rows = await conexao.ExecutaComando(sql);
+
+        let listaRetorno = [];
+
+        if(rows.length > 0){
+            for(let i=0; i<rows.length; i++){
+                var row = rows[i];
+                
+                listaRetorno[i]=[row['venda_idVenda'], row['nome'], row['venda_quantidade'], row['valor_unitario']];
+                
+                
+            }
+        }
+
+        return listaRetorno;
+    }
+
+
     async buscarRelatorio() {
 
         let sql = "SELECT * FROM venda LEFT JOIN cliente ON venda.cliente_cpf_Cliente = cliente.cpf_Cliente LEFT JOIN funcionario ON venda.funcionario_idFuncionario = funcionario.idFuncionario WHERE `nome` LIKE '%"+this.cliente+"%' ORDER BY `cliente`.`nome` ASC";

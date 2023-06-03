@@ -18,6 +18,7 @@ class RelatorioRoute {
         let ctrl = new RelatorioController;
         this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
         this.#router.post('/buscarrelatorio',auth.usuarioEstaLogado, ctrl.buscarRelatorio);
+        this.#router.post('/listarfetch',auth.usuarioEstaLogado, ctrl.listarJson);
     }
 }
 

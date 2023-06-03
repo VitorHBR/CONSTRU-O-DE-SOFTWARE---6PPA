@@ -16,6 +16,15 @@ class RelatorioController {
         res.render('relatorio/listar', {lista: lista});
     }
 
+
+    async listarJson(req, res) {
+        let prod = new RelatorioModel();
+        console.log(req.body.codigo);
+        let lista = await prod.listarRelatorioExpandido(req.body.codigo);
+        
+        res.send(lista);
+    }
+
    
 }
 
