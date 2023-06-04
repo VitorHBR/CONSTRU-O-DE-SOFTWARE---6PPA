@@ -31,7 +31,7 @@ fetch(URL_TO_FETCH, {
                     "</li>";
         
       }
-      console.log(html);
+      
       document.getElementById("listarelatorioexpandido").innerHTML=html;
     });
 
@@ -39,9 +39,14 @@ fetch(URL_TO_FETCH, {
     console.error('Failed retrieving information', err);
   });
 
-  
-
+ 
 
 
       
+}
+
+function exportexcel()
+{ 
+  
+  alasql('SELECT * INTO XLSX("arquivo.xlsx", {headers: false}) FROM ?', [listrelatorio]);
 }
