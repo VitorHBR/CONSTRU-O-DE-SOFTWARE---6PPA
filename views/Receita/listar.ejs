@@ -1,7 +1,7 @@
-<!--Para fazer com fetch
-<script src="/js/Produto/listar.js"></script>-->
+<script src="/js/Insumo/listar.js"></script>
 
-<div>
+<body onload="listarinsumo()">
+  <div>
   <h1>Receitas</h1>
   <div>
     <nav class="navbar bg-body-tertiary">
@@ -24,13 +24,37 @@
           <div class="modal-body">
             <form method="post" action="/receita/cadastrarreceita">
               <div class="mb-3">
-                <label for="message-text" class="col-form-label">Nome:</label>
-                <textarea name="nome" class="form-control" id="nome"></textarea>
+                <label for="nome" class="col-form-label">Nome:</label>
+                <input name="nome" type="text" class="form-control" id="nome">
               </div>
               <div class="mb-3">
-                <label for="message-text" class="col-form-label">Descrição:</label>
+                <label for="message-text" class="col-form-label">Modo de Preparo:</label>
                 <textarea name="descricao" class="form-control" id="descricao"></textarea>
               </div>
+              <div class="form-group" id="ingredientsContainer">
+                <label for="ingredientName">Selecione os Ingredientes:</label>
+                <table id="ingredientsTable" class="table">
+                  <thead>
+                    <tr>
+                      <th>Ingrediente</th>
+                      <th>Quantidade</th>
+                      <th>Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <select class="form-control" id="insumo" name="insumo">
+                          <!-- Adicione mais opções de ingredientes aqui -->
+                        </select>
+                      </td>
+                      <td><input type="number" class="form-control" id="ingredientQuantity"></td>
+                      <td><button type="button" class="btn btn-secondary" onclick="addIngredientToTable()">Adicionar</button></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              
               <button class="btn btn-primary" type="submit">Cadastrar</button>
             </form>
           </div>
@@ -112,3 +136,45 @@
     </table>
   </div>
 </div>
+</body>
+
+<script>
+function addIngredientToTable() {
+  var ingredientSelect = document.getElementById("insumo");
+  var selectedIngredient = ingredientSelect.options[ingredientSelect.selectedIndex].text;
+  var ingredientQuantity = document.getElementById("ingredientQuantity").value;
+
+  if (!selectedIngredient || ingredientQuantity === "") {
+    // Verifica se o usuário selecionou um ingrediente válido e especificou uma quantidade
+    alert("Por favor, selecione um ingrediente e especifique a quantidade.");
+    return;
+  }
+
+  var ingredientsTable = document.getElementById("ingredientsTable").getElementsByTagName("tbody")[0];
+
+  var row = ingredientsTable.insertRow();
+  var ingredientCell = row.insertCell();
+  var quantityCell = row.insertCell();
+  var actionsCell = row.insertCell();
+
+  ingredientCell.textContent = selectedIngredient;
+  quantityCell.textContent = ingredientQuantity;
+
+  var removeButton = document.createElement("button");
+  removeButton.type = "button";
+  removeButton.classList.add("btn", "btn-danger");
+  removeButton.textContent = "Remover";
+  removeButton.onclick = function() {
+    removeIngredient(row);
+  };
+
+  actionsCell.appendChild(removeButton);
+
+  // Limpar a seleção do ingrediente e a quantidade após adicionar o ingrediente à tabela
+  ingredientSelect.value = "";
+  document.getElementById("ingredientQuantity").value = "";
+}
+
+
+
+</script>
