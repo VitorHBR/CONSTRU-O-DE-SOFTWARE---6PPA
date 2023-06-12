@@ -48,7 +48,7 @@ class VendaModel {
         
 
         for (let index = 0; index < this.produtos.length; index++) {
-            sql="INSERT INTO `venda_has_produto` (`venda_idVenda`, `produto_codigo_Produto`, `quantidade`, `valor_unitario`) VALUES ('"+rows.insertId+"', '"+this.produtos[index].produto+"', '"+this.produtos[index].quantidade+"', '"+this.produtos[index].valor/this.produtos[index].quantidade+"')";
+            sql="INSERT INTO `venda_has_produto` (`venda_idVenda`, `produto_codigo_Produto`, `venda_quantidade`, `valor_unitario`) VALUES ('"+rows.insertId+"', '"+this.produtos[index].produto+"', '"+this.produtos[index].quantidade+"', '"+this.produtos[index].valor/this.produtos[index].quantidade+"')";
             var venda_has_produto = await conexao.ExecutaComando(sql);
 
 

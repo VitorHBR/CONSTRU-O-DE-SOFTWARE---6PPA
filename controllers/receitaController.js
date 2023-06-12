@@ -34,6 +34,7 @@ class ReceitaController {
         
         prod.nome= req.body.nome;
         prod.descricao=req.body.descricao;
+        prod.modoPreparo=req.body.modoPreparo;
         
 
         let retorno = await prod.cadastrarReceitas();
@@ -60,6 +61,7 @@ class ReceitaController {
         prod.idReceita= req.body.codigo
         prod.nome= req.body.nome;
         prod.descricao=req.body.descricao;
+        prod.modoPreparo=req.body.modoPreparo;
         
 
         let retorno = await prod.alterarReceitas();

@@ -9,6 +9,7 @@ const RelatorioRoute = require('./routes/relatorioRoute');
 const ClienteRoute = require ('./routes/clienteRoute');
 const FuncionarioRoute = require ('./routes/funcionarioRoute');
 const VendaRoute = require ('./routes/vendaRoute');
+const InsumoRoute = require ('./routes/insumoRoute');
 const LoginRoute = require('./routes/loginRoute');
 
 
@@ -45,6 +46,8 @@ let vendaRota = new VendaRoute();
 app.use('/venda', vendaRota.router);
 let relatorioRota = new RelatorioRoute();
 app.use('/relatorio', relatorioRota.router);
+let insumoRota = new InsumoRoute();
+app.use('/insumo', insumoRota.router);
 
 let loginRota = new LoginRoute();
 app.use('/login', loginRota.router);
