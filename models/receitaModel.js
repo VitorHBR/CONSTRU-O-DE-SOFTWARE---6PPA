@@ -8,22 +8,23 @@ class ReceitaModel {
     #nome;
     #descricao;
     #modoPreparo;
+    #insumos;
          
     get idReceita() { return this.#idReceita; } set idReceita(idReceita) {this.#idReceita = idReceita;}
     get nome() { return this.#nome; } set nome(nome) {this.#nome = nome;}
     get descricao() { return this.#descricao; } set descricao(descricao) {this.#descricao = descricao;}
     get modoPreparo() { return this.#modoPreparo; } set modoPreparo(modoPreparo) {this.#modoPreparo = modoPreparo;}
+    get insumos() { return this.#insumos; } set insumos(insumos) {this.#insumos = insumos;}
     
    
 
-    constructor(idReceita, nome, descricao, modoPreparo) {
+    constructor(idReceita, nome, descricao, modoPreparo, insumos) {
         this.#idReceita = idReceita;
         this.#nome = nome;
         this.#descricao = descricao;    
-        this.#modoPreparo = modoPreparo;  
-        
-        
-       
+        this.#modoPreparo = modoPreparo; 
+        this.#insumos = insumos || [];
+
     }
         
 
@@ -76,8 +77,14 @@ class ReceitaModel {
         let sql = "INSERT INTO `receita` (`idReceita`,  `receitanome`, `receitadescricao`, `modoPreparo`) VALUES (NULL, '"+this.#nome+"','"+this.#descricao+"','"+this.#modoPreparo+"')";
         
         var rows = await conexao.ExecutaComando(sql);
-        
+
+        for (let index = 0; index < this.insumos.length; index++) {
+            sql="INSERT INTO `insumo_receita` (`insumo_idInsumo`, `receita_idReceita`, `quantidade`) VALUES ('"+rows.insertId+"', '"+this.insumos[index].insumo+"', '"+this.insumos[index].quantidade+"')";
+            var insumo_receita = await conexao.ExecutaComando(sql);
+        }
         return true;
+
+
     }
 
 

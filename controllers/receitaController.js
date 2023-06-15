@@ -30,17 +30,16 @@ class ReceitaController {
     async cadastrarReceita(req, res) {
         console.log(req.body);
         let prod = new ReceitaModel();
-
-        
-        prod.nome= req.body.nome;
-        prod.descricao=req.body.descricao;
-        prod.modoPreparo=req.body.modoPreparo;
-        
-
+      
+        prod.nome = req.body.nome;
+        prod.descricao = req.body.descricao;
+        prod.modoPreparo = req.body.modoPreparo;
+        prod.insumos = req.body.insumos;
+      
         let retorno = await prod.cadastrarReceitas();
         let lista = await prod.listarReceitas();
-        res.render('receita/listar', {lista: lista});
-    }
+        res.render('receita/listar', { lista: lista });
+      }
 
     async deletarReceita(req, res) {
         console.log(req.params.codigo);

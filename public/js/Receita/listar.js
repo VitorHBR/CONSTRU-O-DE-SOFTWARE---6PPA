@@ -35,3 +35,45 @@ fetch(URL_TO_FETCH).then(function(response) {
   });
       
 }
+
+function cadastrarReceita(nome,descricao,modoPreparo,insumo)
+{   
+    funcionario= funcionario.replace("usuarioLogado=","");
+    
+    
+   
+    console.log(insumo);
+
+    var dados = {
+                 nome: nome,
+                 descricao:descricao,
+                 modoPreparo: modoPreparo,
+                 insumo: insumo
+                }
+              
+
+    const URL_TO_FETCH = '/receita/cadastrarreceita';
+   
+
+    fetch(URL_TO_FETCH, {
+        method: 'post', // opcional
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(dados)
+      })
+      .then(function(response) {
+        response.text()
+        .then(function(result) {
+          //console.log(result);
+          
+        })
+          
+      })
+      .catch(function(err) { 
+        console.error(err);
+      });
+
+      alert("Receita cadastrada com sucesso");
+       window.location.reload();
+}
+
+
