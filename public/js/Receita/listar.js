@@ -36,19 +36,19 @@ fetch(URL_TO_FETCH).then(function(response) {
       
 }
 
-function cadastrarReceita(nome,descricao,modoPreparo,insumo)
+function cadastrarReceita(nome,descricao,modoPreparo,insumos)
 {   
     funcionario= funcionario.replace("usuarioLogado=","");
     
     
    
-    console.log(insumo);
+    console.log(insumos);
 
     var dados = {
                  nome: nome,
                  descricao:descricao,
                  modoPreparo: modoPreparo,
-                 insumo: insumo
+                 insumos: insumos
                 }
               
 

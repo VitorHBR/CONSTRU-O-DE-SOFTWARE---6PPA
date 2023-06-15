@@ -40,13 +40,13 @@
                 <div class="form-row">
                   <div class="col-md-5">
                     <label for="insumo">Insumo:</label>
-                    <select class="form-control" id="insumo">
+                    <select class="form-control" name ="insumo" id="insumo">
                       <!-- Opções do select com os insumos -->
                     </select>
                   </div>
                   <div class="col-md-5">
                     <label for="quantidadeInsumo">Quantidade:</label>
-                    <input type="number" class="form-control" id="quantidadeInsumo" placeholder="Quantidade">
+                    <input type="number" name="quantidade" class="form-control" id="quantidadeInsumo" placeholder="Quantidade">
                   </div>
 
                   <div class="col-md-2 align-self-end">
@@ -70,13 +70,13 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                  <button class="btn btn-primary" type="submit" onclick="cadastrarReceita(
-                      document.getElementById('nome').value,
-                      document.getElementById('descricao').value,
-                      document.getElementById('modoPreparo').value,
-                      document.getElementById('insumo').value
-                    )">Cadastrar
-                  </button>
+                    <button class="btn btn-primary" type="submit" onclick="cadastrarReceita(
+                        document.getElementById('nome').value,
+                        document.getElementById('descricao').value,
+                        document.getElementById('modoPreparo').value,
+                        insumos
+                      )">Cadastrar
+                    </button>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
                 </div>
               </form>
