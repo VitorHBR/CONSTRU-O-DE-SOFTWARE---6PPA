@@ -77,10 +77,12 @@ class ReceitaModel {
         let sql = "INSERT INTO `receita` (`idReceita`,  `receitanome`, `receitadescricao`, `modoPreparo`) VALUES (NULL, '"+this.#nome+"','"+this.#descricao+"','"+this.#modoPreparo+"')";
         
         var rows = await conexao.ExecutaComando(sql);
-
-        for (let index = 0; index < this.insumos.length; index++) {
-            sql="INSERT INTO `insumo_receita` (`insumo_idInsumo`, `receita_idReceita`, `quantidade`) VALUES ('"+rows.insertId+"', '"+this.insumos[index].insumo+"', '"+this.insumos[index].quantidade+"')";
+        console.log(rows);
+       
+        for (var index = 0; index < this.insumos.length; index++) {
+            sql="INSERT INTO `insumo_receita` (`insumo_idInsumo`, `receita_idReceita`, `quantidade`) VALUES ('"+this.insumos[index].insumo+"', '"+rows.insertId+"', '"+this.insumos[index].quantidade+"')";
             var insumo_receita = await conexao.ExecutaComando(sql);
+            
         }
         return true;
 

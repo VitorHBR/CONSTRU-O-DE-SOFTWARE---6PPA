@@ -19,6 +19,13 @@ class InsumoRoute {
         let auth = new Autenticacao();
         this.#router.get('/',auth.usuarioEstaLogado, ctrl.listarView);
         this.#router.get('/listarfetch',auth.usuarioEstaLogado, ctrl.listarJson);
+        this.#router.post('/buscarinsumo',auth.usuarioEstaLogado, ctrl.buscarInsumo);
+        this.#router.post('/cadastrarinsumo',auth.usuarioEstaLogado, ctrl.cadastrarInsumo);
+        this.#router.get('/deletarinsumo/:codigo',auth.usuarioEstaLogado, ctrl.deletarInsumo);
+        this.#router.post('/alterarinsumo',auth.usuarioEstaLogado, ctrl.alterarInsumo);
+       
+
+        
     }
 }
 

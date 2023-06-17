@@ -51,6 +51,57 @@ class InsumoModel {
         return listaRetorno;
     }
 
+
+
+    async buscarInsumos() {
+        
+        let sql = "SELECT * FROM `insumo` WHERE `nome` LIKE '%"+this.#nome+"%' ORDER BY `insumo`.`nome` ASC";
+        
+        var rows = await conexao.ExecutaComando(sql);
+
+        let listaRetorno = [];
+
+        if(rows.length > 0){
+            for(let i=0; i<rows.length; i++){
+                var row = rows[i];
+                listaRetorno.push(new InsumoModel(row['idInsumo'], row['nome'], row['descricao'], row['preco'], row['quantidade']));
+                
+                
+            }
+        }
+
+        return listaRetorno;
+    }
+
+
+    async cadastrarInsumos() {
+
+        let sql = "INSERT INTO `insumo`(`nome`, `descricao`, `preco`, `quantidade`) VALUES ('"+this.#nome+"','"+this.#descricao+"','"+this.#preco+"','"+this.#quantidade+"')";
+        
+        var rows = await conexao.ExecutaComando(sql);
+
+        return true;
+    }
+
+    async deletarInsumos(codigo) {
+
+        let sql = "DELETE FROM `insumo` WHERE `insumo`.`idInsumo` = "+codigo;
+        
+        var rows = await conexao.ExecutaComando(sql);
+
+        return true;
+    }
+
+
+    async alterarInsumos() {
+
+        let sql = "UPDATE `insumo` SET `nome` = '"+this.#nome+"', `descricao` = '"+this.#descricao+"', `preco` = '"+this.#preco+"', `quantidade` = '"+this.#quantidade+"' WHERE `insumo`.`idInsumo` = "+this.#idInsumo+"";
+        
+        var rows = await conexao.ExecutaComando(sql);
+
+        return true;
+    }
+
 }
 
 module.exports = InsumoModel;

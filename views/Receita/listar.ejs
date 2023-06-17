@@ -24,7 +24,7 @@
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-              <form action="/receita/cadastrarreceita" method="post" >
+             <!-- <form action="/receita/cadastrarreceita" method="post" >   --> 
                 <div class="mb-3">
                   <label for="nome" class="col-form-label">Nome:</label>
                   <input name="nome" type="text" class="form-control" id="nome">
@@ -70,7 +70,7 @@
                   </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-primary" type="submit" onclick="cadastrarReceita(
+                    <button class="btn btn-primary" onclick="cadastrarReceita(
                         document.getElementById('nome').value,
                         document.getElementById('descricao').value,
                         document.getElementById('modoPreparo').value,
@@ -79,7 +79,7 @@
                     </button>
                   <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Sair</button>
                 </div>
-              </form>
+             <!-- </form>   --> 
             </div>
           </div>
         </div>
@@ -242,23 +242,5 @@
     }
   }
 
-  function cadastrarReceita(nome, descricao, modoPreparo,insumos) {
-    console.log('Cadastro finalizado!');
-    console.log('Nome:', nome);
-    console.log('Descrição:', descricao);
-    console.log('Modo de Preparo:', modoPreparo);
-    console.log('Insumos:', insumos);
-
-    // Crie um objeto com os dados da receita
-    const dados = {
-      nome: nome,
-      descricao: descricao,
-      modoPreparo: modoPreparo,
-      insumos: insumos
-    };
-
-    console.log(dados);
-
-    atualizarTabelaInsumos();
-  }
+  
 </script>

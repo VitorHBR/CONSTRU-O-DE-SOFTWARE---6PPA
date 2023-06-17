@@ -38,8 +38,8 @@ fetch(URL_TO_FETCH).then(function(response) {
 
 function cadastrarReceita(nome,descricao,modoPreparo,insumos)
 {   
-    funcionario= funcionario.replace("usuarioLogado=","");
-    
+   // funcionario= funcionario.replace("usuarioLogado=","");
+   console.log("chegei aqui");
     
    
     console.log(insumos);
