@@ -60,7 +60,7 @@ class ReceitaModel {
         if(rows.length > 0){
             for(let i=0; i<rows.length; i++){
                 var row = rows[i];
-                listaRetorno.push(new ReceitaModel(row['idReceita'], row['receitadescricao'], row['modoPreparo']));
+                listaRetorno.push(new ReceitaModel(row['idReceita'], row['receitanome'], row['receitadescricao'], row['modoPreparo']));
                 
                 
             }

@@ -58,7 +58,7 @@ class FuncionarioModel {
 
     async buscarFuncionarios() {
 
-        let sql = "SELECT * FROM `funcionario` WHERE `nome` LIKE '%"+this.#nome+"%'";
+        let sql = "SELECT * FROM `funcionario` WHERE `nome_funcionario` LIKE '%"+this.#nome+"%'";
         
         var rows = await conexao.ExecutaComando(sql);
 
